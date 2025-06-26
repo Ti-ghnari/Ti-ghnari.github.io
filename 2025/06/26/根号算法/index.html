@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>根号算法 | Tighnari&#39;s blog</title>
+    <meta name="author" content="Tighnari" />
+    <meta name="description" content="Welcome to my blog" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIGHNARI&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="https://ti-ghnari.github.io/2025/06/25/%E5%8D%9A%E5%AE%A2%E7%AE%80%E4%BB%8B/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIGHNARI&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a target="_blank" rel="noopener" href="https://ti-ghnari.github.io/2025/06/25/%E5%8D%9A%E5%AE%A2%E7%AE%80%E4%BB%8B/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>根号算法</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/26
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>优雅的暴力啊！</p>
+<span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根号算法的优势在于好想好写，且支持维护更多的信息。</p>
+<p>比如区间众数这种线段树维护不了的，而我们可以使用分块维护。</p>
+<p>当然本篇文章所说的根号算法不只有分块，还有莫队，根号分治等一系列复杂度为 $\sqrt {n}$ 的算法。</p>
+<p>因为神奇的代码块渲染问题，所以先不放代码了，等我解决了或者说放到 GitHub 上放链接也行。</p>
+<p>现在想看代码可以去<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Tighnari/p/18949316">博客园</a></p>
+<h2 id="整除分块"><a href="#整除分块" class="headerlink" title="整除分块"></a>整除分块</h2><p>先从最简单的开始吧！</p>
+<h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><p>形如让我们计算：$\sum_{i&#x3D;1}^{n} \lfloor\frac{n}{i}\rfloor$ 这种式子，</p>
+<p>我们发现，$\lfloor\frac{n}{i}\rfloor$ 在 $i$ 值不同时可能相同，而且是一段连续的区间。</p>
+<p>所以我们考虑将这些地方一起计算。</p>
+<p>具体地，枚举左端点 $l$，求出右端点 $r$，然后令左端点挪动到右端点 $r$ 上。</p>
+<p>经过推导，我们得出了：</p>
+<p>$$r&#x3D;\lfloor \frac{n}{\lfloor\frac{n}{l}\rfloor}\rfloor$$</p>
+<p>直接代入递推计算即可。</p>
+<h3 id="模板题：UVA11526-H-n"><a href="#模板题：UVA11526-H-n" class="headerlink" title="模板题：UVA11526 H(n)"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA11526">模板题：UVA11526 H(n)</a></h3><p>套公式直接做即可。</p>
+<h3 id="例题：模积和"><a href="#例题：模积和" class="headerlink" title="例题：模积和"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2260">例题：模积和</a></h3><p>推式子题，原题让求的是$$\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m (n \bmod i)(m\bmod j),i≠j$$</p>
+<p>长得太丑了，而且 $i≠j$ 丑到实在不忍直视。假定 $n\ge m$ ，得到如下：</p>
+<p>$$\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m (n \bmod i)(m\bmod j)-\sum_{i&#x3D;1}^m (m \bmod i)(n\bmod i)$$</p>
+<p>模数不好表达，考虑利用模数定义转化一下：</p>
+<p>$$\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m (n -i\times \lfloor\frac{n}{i}\rfloor)(m-j\times \lfloor\frac{m}{j}\rfloor) - \sum_{i&#x3D;1}^m (m -i\times \lfloor\frac{m}{i}\rfloor)(m-i\times\lfloor\frac{n}{i}\rfloor)$$</p>
+<p>然后发现减号前面那一项比较特别，写成这样：</p>
+<p>$$\sum_{i&#x3D;1}^{n}(n-i\times\lfloor\frac{n}{i}\rfloor) \times \sum_{j&#x3D;1}^{m}(m-j\times\lfloor\frac{m}{j}\rfloor)$$</p>
+<p>然后给它拆开，得到：</p>
+<p>$$(n^2- \sum_{i&#x3D;1}^{n}(i\times\lfloor\frac{n}{i}\rfloor))\times (m^2- \sum_{j&#x3D;1}^{m}(j\times\lfloor\frac{m}{j}\rfloor))$$</p>
+<p>然后前面这一车就可以拿整除分块算了，后面这一车做类似变化，最终得到一个</p>
+<p>$$(n^2- \sum_{i&#x3D;1}^{n}(i\times\lfloor\frac{n}{i}\rfloor))\times (m^2- \sum_{j&#x3D;1}^{m}(j\times\lfloor\frac{m}{j}\rfloor))- \sum_{i&#x3D;1}^{m}(m\times n- n\times i\times\lfloor\frac{m}{i}\rfloor-m\times i\times\lfloor\frac{n}{i}\rfloor+i^2\times\lfloor\frac{n}{i}\rfloor\times\lfloor\frac{m}{i}\rfloor)$$</p>
+<p>这坨式子，发现后面的也是整除分块，接着就是整除分块快速求：</p>
+<p>$$\sum_{i&#x3D;1}^{n}i\times \lfloor\frac{n}{i}\rfloor$$</p>
+<p>令 $l&#x3D;i$，通过整除分块计算方式，我们知道 $r&#x3D;\lfloor\frac{n}{\lfloor\frac{n}{i}\rfloor} \rfloor$，所以 $r-l+1$ 就等于 $\frac{r\times(r+1)}{2}-\frac{(l-1)\times (l)}{2}$（$1-&gt;l,r$的前缀和相减），然后后面就是 $\frac{n}{l}$ ，然后就可以写完了。</p>
+<p>后面的 $i^2$ 有平方和公式 $\frac{n\times (n+1) \times (2\times n+1)}{6}$ 。</p>
+<h2 id="根号分治"><a href="#根号分治" class="headerlink" title="根号分治"></a>根号分治</h2><h3 id="算法简介-1"><a href="#算法简介-1" class="headerlink" title="算法简介"></a>算法简介</h3><p>根号分治是一种平衡复杂度的思想。</p>
+<p>比如有一道题，我们可以 $O(n^2)$ 预处理，$O(1)$ 回答或者 不预处理，$O(n)$ 回答。 </p>
+<p>这两种复杂度我们都不能接受。</p>
+<p>我们可以预处理 $\sqrt n$ 范围的，然后做到 $O(\sqrt n)$ 预处理 ，$O(\sqrt n)$ 回答。</p>
+<p>题目先【TBD】</p>
+<h2 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h2><p>根号算法的代表，提起根号第一个想到的肯定是我们优雅的分块了！</p>
+<h3 id="算法简介-2"><a href="#算法简介-2" class="headerlink" title="算法简介"></a>算法简介</h3><p>分块是 重构 和 懒标记 的结合，对于修改，通常使用“散块暴力，整块一起”的方法。</p>
+<p>分块的作用主要是 平衡复杂度 和 维护线段树 等无法维护的信息。</p>
+<p>将序列分块后，令块长为 $B$ ，可以得到单步复杂度为 $O(\frac{n}{B}+B)$。</p>
+<p>根据均值不等式可以得到 $B&#x3D;\sqrt n$ 时有最优复杂度 $O(\sqrt n)$。</p>
+<p>接下来手把手教大家写分块模板题：</p>
+<h3 id="【模板】线段树-1"><a href="#【模板】线段树-1" class="headerlink" title="【模板】线段树 1"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3372">【模板】线段树 1</a></h3><p><strong>分块的预处理</strong></p>
+<p>分块预处理需要三个数组，$L_x , R_x , belong_i$ 分别表示，第 $x$ 块序列的左端点，右端点，原序列中的第  $i$ 个点属于哪一块。</p>
+<p><strong>分块区间加法</strong></p>
+<p>顺应上述的分块思想，对于整块的修改打上 tag ，对于散块就暴力修改。<del>可能还用到了一点点的标记永久化的思想？</del></p>
+<p><strong>分块的区间查询</strong></p>
+<p>区间操作都很类似，只要注意一下计算时是否需要加上 tag 就行。</p>
+<p><strong>多种运算操作</strong></p>
+<p>根线段树一样，定义一个合理的优先级就行。</p>
+<h2 id="序列分块"><a href="#序列分块" class="headerlink" title="序列分块"></a>序列分块</h2><h3 id="教主的魔法"><a href="#教主的魔法" class="headerlink" title="教主的魔法"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2801">教主的魔法</a></h3><p>说人话：支持区间加法，查询区间内大于等于 k 的数的个数。</p>
+<p>对于每一块都排好序，然后散块直接做就行了，对于整块，去二分查找后加上 $R_i-x+1$ 即可。</p>
+<h3 id="由乃打扑克"><a href="#由乃打扑克" class="headerlink" title="由乃打扑克"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5356">由乃打扑克</a></h3><p>第一道 Ynoi 题！</p>
+<p>思路继承教主的魔法，整块内排序，考虑怎么求得第 k 小值。</p>
+<p>去二分这个第 k 小值，然后查这个值是否是第 k 小就行啦。</p>
+<h2 id="值域分块"><a href="#值域分块" class="headerlink" title="值域分块"></a>值域分块</h2><h3 id="等这场战争结束之后"><a href="#等这场战争结束之后" class="headerlink" title="等这场战争结束之后"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5064">等这场战争结束之后</a></h3><p>可撤销并查集+值域分块。</p>
+<p>具体做法：离线建立版本树，离散化后值域分块维护每一块每个值出现次数，入树时进行修改或询问，出树时撤销修改。</p>
+<p>然后就是 Ynoi 的经典卡常时刻，本题需要卡的是 20MB 的空间。</p>
+<ol>
+<li><p>值域分块数组可以用 short。</p>
+</li>
+<li><p>块长设大一点。</p>
+</li>
+<li><p>使用版本树，别写在线！</p>
+</li>
+</ol>
+<h3 id="Violet-蒲公英"><a href="#Violet-蒲公英" class="headerlink" title="[Violet] 蒲公英"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4168">[Violet] 蒲公英</a></h3><p>自然的想到离散化值域分块，因为求众数，要求多少个相同数，所以考虑前缀和。</p>
+<p>具体而言，维护两个分块，一个 $s_{i,j}$ 表示第 $i$ 个块内的每个数的个数前缀和（对于 $i$ 统计），一个 $f_{i,j}$ 表示第 $i$ 块与第 $j$ 块之间的众数。这两个数组可以预处理。</p>
+<p>对于询问，我们将询问分成三部分：</p>
+<p>$———l——bl———————br——r————$</p>
+<p>其中 $l,r$ 表示询问区间，$bl,br$ 表示若干个整块。可能的众数集合是：<strong>整块</strong>内的众数，$l\to bl$ 之间的某数，$br\to r$ 之间的某数。</p>
+<p>散块暴力，整块一起，询问区间不能被分为两块时暴力，那么我们就做完了。</p>
+<h3 id="TJOI2007-可爱的质数-【模板】BSGS"><a href="#TJOI2007-可爱的质数-【模板】BSGS" class="headerlink" title=" [TJOI2007] 可爱的质数&#x2F;【模板】BSGS"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3846"> [TJOI2007] 可爱的质数&#x2F;【模板】BSGS</a></h3><p>原式为：$a^l &#x3D; b \pmod p$，化为 $a^{Am-n} &#x3D; b \pmod p$，左右两侧同乘 $a^n$，式子变为：$a^{Am} &#x3D; ba^n \pmod p$</p>
+<p>我们可以预处理出所有的 $b\times a^n \bmod p$ 存入 hash 中，再去计算 $a^{Am} \bmod p$ 然后去查 hash 表中的数是否存在相同的数。 </p>
+<p>用 hash 的时间复杂度是 $O(\sqrt p)$ 。用 map 是 $O(\sqrt p \times \log p)$ </p>
+<h3 id="多少个1？"><a href="#多少个1？" class="headerlink" title="多少个1？"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4884">多少个1？</a></h3><p>若干个 $1……1111 (N)$ 的形式，思考一下可以转化为 $\frac{10^n-1}{9}$ 的形式。</p>
+<p>那么原题就变为求：</p>
+<p>$$\frac{10^n-1}{9}&#x3D;k\pmod m$$</p>
+<p>略微化简，得到如下式子：</p>
+<p>$$10^n &#x3D; 9\times k +1 \pmod m$$</p>
+<p>求最小整数 $n$ 满足上述式子，套BSGS板子。</p>
+<p>中间需要开 __int128 ，或者使用快速乘。</p>
+<p>原理是乘法分配律，可以试着推一把<del>（反正我没推）</del>。</p>
+<h2 id="时间轴分块"><a href="#时间轴分块" class="headerlink" title="时间轴分块"></a>时间轴分块</h2><p>等我写俩题【TBD】</p>
+<h2 id="莫队"><a href="#莫队" class="headerlink" title="莫队"></a>莫队</h2><h3 id="算法简介-3"><a href="#算法简介-3" class="headerlink" title="算法简介"></a>算法简介</h3><p>莫队是优雅的暴力，通过挪动左右指针来移动到下一个询问区间。</p>
+<p>离线算法，不带修复杂度为 $O(n\sqrt n)$，带修能做到 $O(n^{\frac{5}{3}})$。</p>
+<p>需要将询问排序：如果左端点在同一块内，右端点升序，否则左端点升序。</p>
+<p>可以玄学优化，左端点在偶数块右端点升序，否则降序。</p>
+<h3 id="小Z的袜子"><a href="#小Z的袜子" class="headerlink" title="小Z的袜子"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1494">小Z的袜子</a></h3><p>莫队模板题，排完序直接做就行了。</p>
+<h3 id="国家集训队-数颜色-维护队列"><a href="#国家集训队-数颜色-维护队列" class="headerlink" title=" [国家集训队] 数颜色 &#x2F; 维护队列"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1903"> [国家集训队] 数颜色 &#x2F; 维护队列</a></h3><p>带修莫队模板题。</p>
+<p>在莫队基础上加一维时间轴，先按时间轴排序，如果是同一时间轴的则按上述莫队正常排序。</p>
+<p>考虑时间变动的影响，然后去更新消除影响即可。</p>
+<p>复杂度经证明取 $B&#x3D;n^{\frac{2}{3}}$ 最优，所以总体复杂度是 $O(n^{\frac{5}{3}})$</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2025 Tighnari&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Tighnari
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
