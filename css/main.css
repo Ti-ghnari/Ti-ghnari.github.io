@@ -1136,3 +1136,11 @@ ol li {
       rgba(255,255,255,0.7) 100%
     );
   }
+.content {
+    background: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+    backdrop-filter: blur(5px); /* 背景模糊 */
+    padding: 40px;
+    max-width: 800px;
+    margin: 50px auto;
+    border-radius: 10px; /* 可选圆角 */
+  }
