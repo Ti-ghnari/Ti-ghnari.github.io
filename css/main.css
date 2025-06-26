@@ -722,11 +722,17 @@ blockquote {
     padding: 0 15px;
 }
 body {
-    background: #f6f8fa;
-    color: #1e3e3f;
-    font: 500 14px Lexend, "Noto Sans SC", sans-serif;
-    overflow-x: hidden;
-    width: 100%;
+    background-image: url('/images/background8.jpg');
+    background-size: cover;       /* 覆盖整个页面 */
+    background-attachment: fixed; /* 滚动时固定背景 */
+    background-position: center;  /* 图片居中 */
+    background-repeat: no-repeat; /* 禁止重复 */
+    color: #000000; /* 调整文字颜色保证可读性 */
+}
+article {
+    background-color: rgba(173, 173, 173, 0.9); /* 白色半透明遮罩 */
+    padding: 100px;
+    border-radius: 80px;
 }
 code {
     background: #bddcf76b;
@@ -994,6 +1000,7 @@ ol li {
         padding-left: 20px;
     }
 }
+
 /* 卡片容器 - 响应式网格布局 */
 /* .friends-container {
     display: grid;
