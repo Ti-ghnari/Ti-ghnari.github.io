@@ -1137,8 +1137,8 @@ ol li {
     );
   }
 .content {
-    background: rgba(255, 255, 255, 0.2); /* 半透明背景 */
-    backdrop-filter: blur(5px); /* 背景模糊 */
+    background: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+    backdrop-filter: blur(15px); /* 背景模糊 */
     padding: 40px;
     max-width: 800px;
     margin: 50px auto;
