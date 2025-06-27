@@ -3,26 +3,22 @@
   position: fixed;
   top: 120px;
   right: 40px;
-  width: 300px;
+  width: 320px;
   max-height: 75vh;
   overflow-y: auto;
   border-radius: 16px;
   padding: 20px;
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform: translateX(0);
-  opacity: 1;
-  display: block;
   
   /* 优雅的毛玻璃效果 */
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* 添加浮动效果 */
 .toc-container:hover {
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   transform: translateY(-5px);
@@ -47,10 +43,6 @@
   font-weight: 600;
 }
 
-.toc-header i {
-  color: #6a11cb;
-}
-
 .toc-close-btn {
   background: rgba(0, 0, 0, 0.05);
   border: none;
@@ -61,9 +53,6 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .toc-close-btn:hover {
@@ -79,59 +68,101 @@
 }
 
 .toc-content li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   position: relative;
   transition: all 0.2s ease;
 }
 
-.toc-content a {
-  text-decoration: none;
-  color: #4a5568;
-  font-size: 1.05rem;
-  display: block;
-  padding: 10px 15px;
-  transition: all 0.3s ease;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* ================= 层级优化 ================= */
+/* 一级标题 (H2) */
+.toc-item.level-0 {
+  margin-bottom: 15px;
 }
 
-.toc-content a:hover {
+.toc-item.level-0 > .toc-link {
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 12px 20px;
+  background: rgba(106, 17, 203, 0.08);
+  border-left: 3px solid #6a11cb;
+  border-radius: 8px 0 0 8px;
+}
+
+.toc-item.level-0 > .toc-link i {
+  font-size: 1.1rem;
+}
+
+/* 二级标题 (H3) */
+.toc-item.level-1 {
+  margin-left: 25px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.toc-item.level-1 > .toc-link {
+  font-size: 1.05rem;
+  padding: 10px 20px 10px 35px;
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 2px solid #3498db;
+}
+
+.toc-item.level-1:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3498db;
+}
+
+/* 三级标题 (H4) */
+.toc-item.level-2 {
+  margin-left: 45px;
+  margin-top: 5px;
+}
+
+.toc-item.level-2 > .toc-link {
+  font-size: 0.95rem;
+  padding: 8px 20px 8px 25px;
+  background: rgba(255, 255, 255, 0.4);
+  color: #6a737d;
+  border-left: 1px solid #2ecc71;
+}
+
+.toc-item.level-2 > .toc-link i {
+  display: none;
+}
+
+/* 通用链接样式 */
+.toc-link {
+  text-decoration: none;
+  color: #4a5568;
+  display: block;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.toc-link:hover {
   background: rgba(255, 255, 255, 0.7);
   transform: translateX(5px);
 }
 
-.toc-content a.active {
+.toc-link.active {
   color: #6a11cb;
   font-weight: 600;
   background: rgba(106, 17, 203, 0.1);
   box-shadow: 0 0 10px rgba(106, 17, 203, 0.1);
-  border-left: 4px solid #6a11cb;
-}
-
-/* 层级样式 */
-.level-0 {
-  padding-left: 10px;
-  font-size: 1.1rem;
-}
-
-.level-1 {
-  padding-left: 30px;
-  font-size: 1.0rem;
-}
-
-.level-2 {
-  padding-left: 50px;
-  font-size: 0.95rem;
-  color: #6a737d;
 }
 
 /* 图标样式 */
-.toc-content a i {
-  margin-right: 10px;
-  font-size: 0.9rem;
+.toc-link i {
+  margin-right: 12px;
+  font-size: 0.95rem;
   width: 20px;
   text-align: center;
   color: #6a11cb;
@@ -144,7 +175,6 @@
 
 .toc-container::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.03);
-  border-radius: 4px;
 }
 
 .toc-container::-webkit-scrollbar-thumb {
@@ -172,8 +202,6 @@
   align-items: center;
   font-size: 1.8rem;
   transition: all 0.3s ease;
-  
-  /* 毛玻璃效果 */
   background: rgba(106, 17, 203, 0.8);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -183,7 +211,6 @@
 
 .toc-mobile-toggle:hover {
   transform: scale(1.1);
-  box-shadow: 0 10px 35px rgba(106, 17, 203, 0.4);
 }
 
 /* 响应式设计 */
@@ -225,6 +252,15 @@
     display: flex;
   }
   
+  /* 移动端层级调整 */
+  .toc-item.level-1 {
+    margin-left: 15px;
+  }
+  
+  .toc-item.level-2 {
+    margin-left: 30px;
+  }
+  
   @keyframes tocSlideIn {
     from {
       opacity: 0;
@@ -235,10 +271,4 @@
       transform: translate(-50%, -50%);
     }
   }
-}
-
-/* 文章内容不需要额外样式 */
-.article-content {
-  width: 100%;
-  max-width: 100%;
 }
