@@ -199,7 +199,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #00a596">
+                <a href="/tags/study-notes/" style="color: #ffa2c4">
                     study notes
                 </a>
             </span>
@@ -274,55 +274,7 @@ void topu() &#123;
   &#125;
 &#125;
 </code></pre>
-<p>把代码拼起来就是<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5357">【模板】AC自动机</a><br>这里给一份封装好的结构体AC自动机，define 个 N 和 SIZE 即可食用：<br>N 是数据范围，SIZE 是字符集</p>
-<details>
-<summary>点击查看代码</summary>
-
-<pre><code class="language-cpp">struct ACauto&#123;
-	struct node&#123;
-		int son[SIZE];
-		int fail,end;
-		void init()&#123;
-			memset(son,0,sizeof(son));
-			fail=end=0;
-		&#125;
-	&#125;tr[N];
-	int tot=0;
-	void init()&#123;
-		tot=0;
-		tr[0].init();
-	&#125;
-	void insert(string s)&#123;
-		int u=0;
-		for(char ch:s)&#123;
-			int &amp;son=tr[u].son[ch-&#39;a&#39;];
-			if(!son) son=++tot,tr[son].init();
-			u=son;
-		&#125;
-		tr[u].end++;
-	&#125;
-	void build()&#123;
-		queue&lt;int&gt; que;
-		for(int i=0;i&lt;SIZE;i++)&#123;
-			if(tr[0].son[i]) que.push(tr[0].son[i]);
-		&#125;
-		while(!que.empty())&#123;
-			int u=que.front();
-			que.pop();
-			for(int i=0;i&lt;SIZE;i++)&#123;
-				if(tr[u].son[i])&#123;
-					tr[tr[u].son[i]].fail=tr[tr[u].fail].son[i];
-					que.push(tr[u].son[i]);
-				&#125;else&#123;
-					tr[u].son[i]=tr[tr[u].fail].son[i];
-				&#125;
-			&#125;
-		&#125;
-	&#125;
-&#125;AC;
-</code></pre>
-</details>
-
+<p>把代码拼起来就是<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5357">【模板】AC自动机</a></p>
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>还没做，咕咕咕</p>
 <h3 id="病毒"><a href="#病毒" class="headerlink" title="病毒"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2444">病毒</a></h3><p>“可以，总司令” 有 60 分。</p>
 <p>构造文本串使得所有模式串都未出现在文本串中。</p>
