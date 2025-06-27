@@ -1,0 +1,244 @@
+/* 悬浮目录容器 - 固定定位 */
+.toc-container {
+  position: fixed;
+  top: 120px;
+  right: 40px;
+  width: 300px;
+  max-height: 75vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: 20px;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateX(0);
+  opacity: 1;
+  display: block;
+  
+  /* 优雅的毛玻璃效果 */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 添加浮动效果 */
+.toc-container:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.toc-header h3 {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.toc-header i {
+  color: #6a11cb;
+}
+
+.toc-close-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  color: #6a737d;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toc-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
+  color: #e74c3c;
+}
+
+.toc-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc-content li {
+  margin-bottom: 10px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.toc-content a {
+  text-decoration: none;
+  color: #4a5568;
+  font-size: 1.05rem;
+  display: block;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.toc-content a:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateX(5px);
+}
+
+.toc-content a.active {
+  color: #6a11cb;
+  font-weight: 600;
+  background: rgba(106, 17, 203, 0.1);
+  box-shadow: 0 0 10px rgba(106, 17, 203, 0.1);
+  border-left: 4px solid #6a11cb;
+}
+
+/* 层级样式 */
+.level-0 {
+  padding-left: 10px;
+  font-size: 1.1rem;
+}
+
+.level-1 {
+  padding-left: 30px;
+  font-size: 1.0rem;
+}
+
+.level-2 {
+  padding-left: 50px;
+  font-size: 0.95rem;
+  color: #6a737d;
+}
+
+/* 图标样式 */
+.toc-content a i {
+  margin-right: 10px;
+  font-size: 0.9rem;
+  width: 20px;
+  text-align: center;
+  color: #6a11cb;
+}
+
+/* 滚动条样式 */
+.toc-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.toc-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+
+.toc-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.toc-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* 移动端目录按钮 */
+.toc-mobile-toggle {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
+  z-index: 1001;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+  
+  /* 毛玻璃效果 */
+  background: rgba(106, 17, 203, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(106, 17, 203, 0.3);
+}
+
+.toc-mobile-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 35px rgba(106, 17, 203, 0.4);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .toc-container {
+    width: 280px;
+    right: 20px;
+    top: 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .toc-container {
+    width: 260px;
+    top: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toc-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 400px;
+    max-height: 70vh;
+    z-index: 10000;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    display: none;
+  }
+  
+  .toc-container.active {
+    display: block;
+    animation: tocSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .toc-mobile-toggle {
+    display: flex;
+  }
+  
+  @keyframes tocSlideIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+/* 文章内容不需要额外样式 */
+.article-content {
+  width: 100%;
+  max-width: 100%;
+}
