@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Tags: study notes | Tighnari&#39;s blog</title>
+    <title>一位小提厨 ！ | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -42,6 +42,13 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
 
 
 
@@ -169,86 +176,21 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/study-notes/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                study notes
-            </a>
-        </span>
-        
-        
-        
-        
+            <div class="article">
+    <div>
+        <h1>一位小提厨 ！</h1>
     </div>
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/6/26</div>
-            <a href="/2025/06/26/Sqrt%20Algorithm/">
-                <h3>Sqrt Algorithm</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/study-notes/" style="color: #00a596">
-                            study notes
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/6/25</div>
-            <a href="/2025/06/25/Acauto%20Notes/">
-                <h3>ACauto Notes</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/study-notes/" style="color: #00bcd4">
-                            study notes
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
-    
-</div>
 
+    
+        <!-- page 部分设计 -->
+        
+            <!-- 其他 page 部分 -->
+        
+    
+
+<!-- 引入悬浮目录资源 -->
+<link rel="stylesheet" href="/css/toc.css">
+<script src="/js/toc.js"></script>
             <footer id="footer">
     <div id="footer-wrap">
         <div>
@@ -277,6 +219,26 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23limqYY7vc8UqtOwE",
+        clientSecret: "46550e05732da9bcac2486329b528d4382f83ac7",
+        repo: "issue",
+        owner: "Ti-ghnari",
+        admin: "Ti-ghnari".split(","),
+        language: "zh-CN",
+        id: location.pathname,
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
     
 </body>
 </html>
