@@ -1,13 +1,16 @@
-/* ================= ������ʽ ================= */
+/* ================= �޸����������ʽ ================= */
 #desk-pet-container {
   position: fixed;
   left: 30px;
   bottom: 30px;
   z-index: 1000;
   cursor: pointer;
-  transition: transform 0.3s ease;
   opacity: 0;
   visibility: hidden;
+  /* ����3D͸��Ч�� */
+  perspective: 800px;
+  transform-style: preserve-3d;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 #desk-pet-container.show {
@@ -15,48 +18,88 @@
   visibility: visible;
 }
 
-#desk-pet-container:hover {
-  transform: scale(1.1);
-}
-
-#desk-pet-container:active {
-  transform: scale(0.9);
-}
-
 .desk-pet {
   width: 150px;
   height: 150px;
-  background-image: url('/images/pet.png'); /* �޸�Ϊ����ͼƬ·�� */
+  background-image: url('/images/pet.png'); /* �滻Ϊ����ͼƬ·�� */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   animation: float 3s ease-in-out infinite;
+  
+  /* �޸���תЧ���Ĺؼ����� */
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* �޸���ͣ��תЧ�� */
+#desk-pet-container:hover .desk-pet {
+  /* ����!importantȷ����������transformЧ�� */
+  transform: rotateY(720deg) scale(1.1) !important;
+  /* ���ӷ���Ч����ǿ�Ӿ����� */
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+  /* ��ͣʱ��ͣ�������� */
+  animation-play-state: paused;
+}
+
+/* ���Ч�� */
+#desk-pet-container:active .desk-pet {
+  transform: rotate(360deg) scale(0.9) !important;
+  filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.9));
 }
 
 .tooltip {
   position: absolute;
-  top: -40px;
+  top: -45px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 6px 12px;
-  border-radius: 15px;
+  padding: 8px 15px;
+  border-radius: 20px;
   font-size: 14px;
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
+  min-width: 160px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 #desk-pet-container:hover .tooltip {
   opacity: 1;
+  animation: tooltipPulse 1.5s infinite;
 }
 
-/* �������� */
+/* ��ǿ�������� */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0) rotate(0); 
+  }
+  25% { 
+    transform: translateY(-15px) rotate(5deg); 
+  }
+  50% { 
+    transform: translateY(0) rotate(0); 
+  }
+  75% { 
+    transform: translateY(-15px) rotate(-5deg); 
+  }
+}
+
+/* ������ʾ�򶯻� */
+@keyframes tooltipPulse {
+  0%, 100% { 
+    transform: translateX(-50%) scale(1); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  50% { 
+    transform: translateX(-50%) scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
 }
 
 /* ��Ӧʽ��� */
@@ -67,8 +110,19 @@
   }
   
   .desk-pet {
-    width: 90px;
-    height: 90px;
+    width: 150px;
+    height: 150px;
+  }
+  
+  /* �ƶ��˼�С��ת���� */
+  #desk-pet-container:hover .desk-pet {
+    transform: rotateY(360deg) scale(1.05) !important;
+  }
+  
+  .tooltip {
+    top: -40px;
+    font-size: 12px;
+    min-width: 120px;
   }
 }
 
