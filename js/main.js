@@ -41,3 +41,26 @@ const app = Vue.createApp({
     },
 });
 app.mount("#layout");
+
+// ��ȡ����Ԫ��
+const deskPet = document.getElementById('desk-pet-container');
+
+// �ص���������
+deskPet.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// ���ӹ����¼�������������500pxʱ��ʾ����
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 500) {
+    deskPet.classList.add('show');
+  } else {
+    deskPet.classList.remove('show');
+  }
+});
+
+// ��ʼ��ʱ��������
+deskPet.style.transition = 'opacity 0.5s ease, visibility 0.5s ease';
