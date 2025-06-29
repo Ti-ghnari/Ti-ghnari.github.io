@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>categories | Tighnari&#39;s blog</title>
+    <title>✨更新日志 | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -42,6 +42,13 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
 
 
 
@@ -169,15 +176,70 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
+            <div class="article">
+    <div>
+        <h1>✨更新日志</h1>
+    </div>
+
     
-    <div class="categories-tags">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/29
+        </span>
         
         
     </div>
     
+    <!-- 文章内容区域 - 修复加密逻辑 -->
+    <div class="article-content">
+        
+            <!-- 非加密内容直接显示 -->
+            <div class="content" v-pre>
+                <p>博客配置和文章更新都会写在这里</p>
+<span id="more"></span>
+
+<p>本博客从 <a href="cnblogs.com/Tighnari">原地址</a> 搬迁过来，但搬迁内容仅为学术类内容。</p>
+<h2 id="博客更新："><a href="#博客更新：" class="headerlink" title="博客更新："></a>博客更新：</h2><p>Update on 2025.6.25: 成功搭建起了博客，并完成封面设置和测试工作。<br>Update on 2025.6.26：新增了文章右侧目录和友链功能。<br>Update on 2025.6.27：给文章打了粗略 tag，分类功能暂不考虑，后续会细化 tag 内容。<br>Update on 2025.6.28：新增了左下角的小桌宠，点击可以回到主页。<br>Update on 2025.6.29：美化了友链界面。</p>
+<h2 id="文章更新："><a href="#文章更新：" class="headerlink" title="文章更新："></a>文章更新：</h2><p>Update on 2025.6.25：搬了简介和AC自动机的笔记。<br>Update on 2025.6.26：上新了根号算法。<br>Update on 2025.6.27：更新了根号算法内容。<br>Update on 2025.6.29：继续更新根号算法内容。</p>
+
+            </div>
+        
+    </div>
+
+    <!-- 毛玻璃悬浮目录区域 -->
+    <aside class="toc-container">
+        <div class="toc-header">
+            <h3><i class="fas fa-list"></i> 文章目录</h3>
+            <button class="toc-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="toc-content" id="toc-content"></div>
+    </aside>
+
+    <!-- 移动端目录按钮 -->
+    <div class="toc-mobile-toggle">
+        <i class="fas fa-list"></i>
+    </div>
+
+    
+    
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+    
+    
+    
 </div>
 
+    
+
+<!-- 引入悬浮目录资源 -->
+<link rel="stylesheet" href="/css/toc.css">
+<script src="/js/toc.js"></script>
             <footer id="footer">
     <div id="footer-wrap">
         <div>
@@ -211,6 +273,26 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23limqYY7vc8UqtOwE",
+        clientSecret: "46550e05732da9bcac2486329b528d4382f83ac7",
+        repo: "issue",
+        owner: "Ti-ghnari",
+        admin: "Ti-ghnari".split(","),
+        language: "zh-CN",
+        id: location.pathname,
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
     
 </body>
 </html>
