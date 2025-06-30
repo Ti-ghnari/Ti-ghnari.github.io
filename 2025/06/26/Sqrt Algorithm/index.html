@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #03a9f4">
+                <a href="/tags/Data-Structure/" style="color: #ff7d73">
                     Data Structure
                 </a>
             </span>
@@ -223,10 +223,11 @@
                 <p>优雅的暴力啊！</p>
 <span id="more"></span>
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根号算法的优势在于好想好写，且支持维护更多的信息。</p>
+<h2 id="The-Begin"><a href="#The-Begin" class="headerlink" title="The Begin"></a>The Begin</h2><p>根号算法的优势在于好想好写，且支持维护更多的信息。</p>
 <p>比如区间众数这种线段树维护不了的，而我们可以使用分块维护。</p>
 <p>当然本篇文章所说的根号算法不只有分块，还有莫队，根号分治等一系列复杂度为 $\sqrt {n}$ 的算法。</p>
 <p>本文肯定会有一个 Ynoi 的大分块的，只是时间问题。</p>
+<p>Update on 2025.6.30：完结了，笔者真的写了 Ynoi 系列大分块中的一个。</p>
 <h2 id="整除分块"><a href="#整除分块" class="headerlink" title="整除分块"></a>整除分块</h2><p>先从最简单的开始吧！</p>
 <h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><p>形如让我们计算：$\sum_{i&#x3D;1}^{n} \lfloor\frac{n}{i}\rfloor$ 这种式子，</p>
 <p>我们发现，$\lfloor\frac{n}{i}\rfloor$ 在 $i$ 值不同时可能相同，而且是一段连续的区间。</p>
@@ -371,6 +372,46 @@
 <p>考虑以 k 为块长分块，每块内做前缀后缀积，然后所有定长为 k 的恰好被分成两段（或者一整段）。</p>
 <p>然后就可以直接写了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%8C%BA%E9%97%B4(range).cpp">代码</a></p>
+<h2 id="The-End-去往那五彩斑斓的世界"><a href="#The-End-去往那五彩斑斓的世界" class="headerlink" title="The End 去往那五彩斑斓的世界"></a>The End 去往那<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4117">五彩斑斓的世界</a></h2><blockquote>
+<p>故事终于来到最后，你打败了路上的所有小怪，精英怪，你来到了最终 boss 之前。</p>
+<p>你攥紧了手中的宝具：[突刺贯穿第二分块]。</p>
+<p>仰望着漆黑的天空，轻抚着狂乱的风暴：</p>
+<p>按照故事的剧本，打败最终 boss 之后，你就到了<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4117">五彩斑斓的世界</a>。</p>
+<p>是的，是时候动身了，还有人在等着我们。</p>
+</blockquote>
+<p>fun fact：主播为了找一道能做的大分块找了一个多小时，最终还是回到了这道题</p>
+<p>给定长度为 $n$ 的序列，$m$ 次操作</p>
+<ol>
+<li>把区间 $[l,r]$ 中大于 $x$ 的数减去 $x$。</li>
+<li>查询区间 $[l,r]$ 中 $x$ 的出现次数。</li>
+</ol>
+<p>$n\le 10^6 , m\le 5\times 10^5 ,0\le a_i,x \le 10^5+1$</p>
+<p>拿到手第一刻很懵，相同的数可以并查集缩一起，查询时累加并查集大小就行。</p>
+<p>但是我们似乎避不开要枚举值域，那我们就需要分析值域上的性质了。</p>
+<p>假定我们现在序列中最大的数是 mx，减去的数是 x，n 为个数，m 为操作数，v 为值域。</p>
+<p>分两种情况讨论：</p>
+<ol>
+<li><p>$2x\ge mx$, 那么全局最大值变为：$mx&#x3D;mx-x$</p>
+</li>
+<li><p>$2x &lt; mx$, 我们可以先令 $\le x$ 的数 +x ，那么全局就都比 x 大了，此时给全局打一个减法 tag，全局最大值依然变为：$mx&#x3D;mx-x$ 。</p>
+</li>
+</ol>
+<p>发现全局最大值单调不增！</p>
+<p>那么我们最大值上界是 $10^5$ 的，而操作却有 $5\times 10^5$ 次。</p>
+<p>这是一个很好的均摊，我们直接枚举修改了哪些值即可。总计是 $O(v)$ 左右的。</p>
+<p>那么复杂度有了保证，再想想实现的细节。</p>
+<p>对于整块：<br>修改时直接遍历需要改的值，然后并查集合并。<br>询问时也是直接回答就行。<br>修改 $O(\sqrt n)$ ，询问 $O(1)$ 的。</p>
+<p>对于散块：<br>修改时将所有值复原，再修改。<br>询问时也将所有值复原，再遍历。<br>都是 $O(\sqrt n)$ 的。</p>
+<p>注意值域有 0，这玩意放进并查集里完蛋了，但是 0 不会变成负数，也不会有任何数变成 0。<br>所以可以直接预处理所有 0 的情况，做前缀和即可。</p>
+<p>当然上述做完上述事情就已经可以 AC 另一道题了：<a target="_blank" rel="noopener" href="https://codeforces.com/contest/896/problem/E">CF896E</a><br>fun fact：本题和 lxl 提出的珂朵莉树 是一场比赛的题。</p>
+<p>本题 lxl 卡了线性空间，主播跟 lxl 斗智斗勇一中午终于调过。<br>fun fact：主播写的空间常数略大的线性空间也被卡飞了。</p>
+<p>发现块与块之间相互独立，将询问离线下来，去每一个块里跑一遍，然后累加答案就行。</p>
+<p>最终复杂度是：$O(m\sqrt n + n\sqrt v)$ 左右吧，不太会算。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E4%BA%94%E5%BD%A9%E6%96%91%E6%96%93%E7%9A%84%E4%B8%96%E7%95%8C.cpp">代码</a></p>
+<blockquote>
+<p>来，出发吧，去选择那独一无二的明天</p>
+</blockquote>
+<p>除非 lxl 来讲课，不然这是主播最后一道 Ynoi 大分块系列题。</p>
 
             </div>
         
