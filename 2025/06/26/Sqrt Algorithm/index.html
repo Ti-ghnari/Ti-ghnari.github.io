@@ -199,14 +199,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #00bcd4">
+                <a href="/tags/study-notes/" style="color: #ffa2c4">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #ffa2c4">
+                <a href="/tags/Data-Structure/" style="color: #00a596">
                     Data Structure
                 </a>
             </span>
@@ -403,7 +403,7 @@
 <p>对于整块：<br>修改时直接遍历需要改的值，然后并查集合并。<br>询问时也是直接回答就行。<br>修改 $O(\sqrt n)$ ，询问 $O(1)$ 的。</p>
 <p>对于散块：<br>修改时将所有值复原，再修改。<br>询问时也将所有值复原，再遍历。<br>都是 $O(\sqrt n)$ 的。</p>
 <p>注意值域有 0，这玩意放进并查集里完蛋了，但是 0 不会变成负数，也不会有任何数变成 0。<br>所以可以直接预处理所有 0 的情况，做前缀和即可。</p>
-<p>当然上述做完上述事情就已经可以 AC 另一道题了：<a target="_blank" rel="noopener" href="https://codeforces.com/contest/896/problem/E">CF896E</a><br>fun fact：本题和 lxl 提出的珂朵莉树 是一场比赛的题。</p>
+<p>当然做完上述事情就已经可以 AC 另一道题了：<a target="_blank" rel="noopener" href="https://codeforces.com/contest/896/problem/E">CF896E</a><br>fun fact：本题和 lxl 提出的珂朵莉树 是一场比赛的题。</p>
 <p>本题 lxl 卡了线性空间，主播跟 lxl 斗智斗勇一中午终于调过。<br>fun fact：主播写的空间常数略大的线性空间也被卡飞了。</p>
 <p>发现块与块之间相互独立，将询问离线下来，去每一个块里跑一遍，然后累加答案就行。</p>
 <p>最终复杂度是：$O(m\sqrt n + n\sqrt v)$ 左右吧，不太会算。</p>
