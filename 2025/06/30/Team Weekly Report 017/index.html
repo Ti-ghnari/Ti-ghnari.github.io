@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>✨更新日志 | Tighnari&#39;s blog</title>
+    <title>Team Weekly Report 017 | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -43,6 +43,9 @@
 
 <script src="/js/lib/preview.js"></script>
 
+
+<script src="https://s4.zstatic.net/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<script src="/js/lib/crypto.js"></script>
 
 
 
@@ -178,7 +181,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>✨更新日志</h1>
+        <h1>Team Weekly Report 017</h1>
     </div>
 
     
@@ -187,33 +190,45 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/29
+            2025/6/30
         </span>
         
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Team-Report/" style="color: #00a596">
+                    Team Report
+                </a>
+            </span>
+            
+        </span>
         
     </div>
     
     <!-- 文章内容区域 - 修复加密逻辑 -->
     <div class="article-content">
         
-            <!-- 非加密内容直接显示 -->
-            <div class="content" v-pre>
-                <p>博客配置和文章更新都会写在这里</p>
-<span id="more"></span>
-
-<p>本博客从 <a target="_blank" rel="noopener" href="https://cnblogs.com/Tighnari">原地址</a> 搬迁过来，但搬迁内容仅为学术类内容。</p>
-<h2 id="博客更新："><a href="#博客更新：" class="headerlink" title="博客更新："></a>博客更新：</h2><p>Update on 2025.6.25: 成功搭建起了博客，并完成封面设置和测试工作。</p>
-<p>Update on 2025.6.26：新增了文章右侧目录和友链功能。</p>
-<p>Update on 2025.6.27：给文章打了粗略 tag，分类功能暂不考虑，后续会细化 tag 内容。<br>Update on 2025.6.27：新增了评论功能，目前因为不知道的bug，需要在置顶的文章登录后才可以去其他博客发送。<br>Update on 2025.6.27：同时发现如果给文章起中文名字可能导致生成的链接过长使得无法建立评论</p>
-<p>Update on 2025.6.28：新增了左下角的小桌宠，点击可以回到主页。</p>
-<p>Update on 2025.6.29：美化了友链界面。</p>
-<h2 id="文章更新："><a href="#文章更新：" class="headerlink" title="文章更新："></a>文章更新：</h2><p>Update on 2025.6.25：搬了简介和AC自动机的笔记。</p>
-<p>Update on 2025.6.26：上新了根号算法。</p>
-<p>Update on 2025.6.27：更新了根号算法内容。</p>
-<p>Update on 2025.6.29：继续更新根号算法内容。</p>
-<p>Update on 2025.6.30：搬迁原博客的文章。</p>
-
-            </div>
+        
+        <input
+            id="crypto"
+            :class="['input', cryptoStatus]"
+            :disabled="cryptoStatus === 'success'"
+            ref="crypto"
+            placeholder="文章被加密，请输入密码"
+            data-encrypted="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"
+            data-shasum="40c33520cf32c94c13bf3105e1afea898d52b0874de0728f357cc275524e1014"
+            v-model="crypto"
+        />
+        <transition name="fade">
+            <div class="content" ref="content" v-show="cryptoStatus === 'success'"></div>
+        </transition>
+        
         
     </div>
 

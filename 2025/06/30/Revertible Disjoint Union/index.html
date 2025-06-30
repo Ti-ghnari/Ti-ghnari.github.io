@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | Tighnari&#39;s blog</title>
+    <title>Revertible Disjoint Union | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -45,7 +45,12 @@
 
 
 
-<script src="/js/lib/search.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/gitalk/1.8.0/gitalk.min.css" />
+
+
 
 
 
@@ -171,217 +176,93 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Revertible Disjoint Union</h1>
+    </div>
+
+    
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/30
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
             
-<div id="archives">
-    
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
-    
-    <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="✨博客简介">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/25</div>
-                <a href="/2025/06/25/%E5%8D%9A%E5%AE%A2%E7%AE%80%E4%BB%8B/">
-                    <h3>✨博客简介</h3>
+            
+            <span class="tag">
+                
+                <a href="/tags/study-notes/" style="color: #00a596">
+                    study notes
                 </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="acautonotes">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/25</div>
-                <a href="/2025/06/25/Acauto%20Notes/">
-                    <h3>ACauto Notes</h3>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Data-Structure/" style="color: #ff7d73">
+                    Data Structure
                 </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/study-notes/" style="color: #ffa2c4">
-                                study notes
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/string/" style="color: #00bcd4">
-                                string
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="sqrtalgorithm">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/26</div>
-                <a href="/2025/06/26/Sqrt%20Algorithm/">
-                    <h3>Sqrt Algorithm</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/study-notes/" style="color: #00bcd4">
-                                study notes
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Data-Structure/" style="color: #00a596">
-                                Data Structure
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="✨更新日志">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/29</div>
-                <a href="/2025/06/29/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/">
-                    <h3>✨更新日志</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="revertibledisjointunion">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/30</div>
-                <a href="/2025/06/30/Revertible%20Disjoint%20Union/">
-                    <h3>Revertible Disjoint Union</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/study-notes/" style="color: #ff7d73">
-                                study notes
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Data-Structure/" style="color: #03a9f4">
-                                Data Structure
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="suffixarray">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/30</div>
-                <a href="/2025/06/30/Suffix%20Array/">
-                    <h3>Suffix Array</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/study-notes/" style="color: #00bcd4">
-                                study notes
-                            </a>
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/string/" style="color: #03a9f4">
-                                string
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="teamweeklyreport017">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/30</div>
-                <a href="/2025/06/30/Team%20Weekly%20Report%20017/">
-                    <h3>Team Weekly Report 017</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/Team-Report/" style="color: #00a596">
-                                Team Report
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+        </span>
         
     </div>
+    
+    <!-- 文章内容区域 - 修复加密逻辑 -->
+    <div class="article-content">
+        
+            <!-- 非加密内容直接显示 -->
+            <div class="content" v-pre>
+                <p>可撤销并查集</p>
+<span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天在吃饭的时候听 @<em>Kenma</em> 讲解了一遍，发现好像很好用而且很好写，就写了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>拿栈存每次操作时被合并的父亲节点，撤销时直接将其指回自己，所以不能使用路径压缩，使用按秩合并。<br>只能离线。</p>
+<h3 id="可持久化并查集"><a href="#可持久化并查集" class="headerlink" title="可持久化并查集"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3402">可持久化并查集</a></h3><p>发现如果访问某个历史版本时采用一步一步撤销回去太慢了。所以我们建立一棵版本树。<br>形象地说：想象一条以时间为节点的链，上面连着几条跨越时间的边，当我们访问到某个时间节点时，如果他有跨越时间的边，直接访问，然后正常进行操作即可。（有没有感觉很优美而且很有意境，<del>学魔怔了</del>）<br>具体而言：如果时间点 $i$ 不是操作 2 ，那就让时间点 $i$ 向 $i+1$ 连边，时间照常流转；如果时间点 $i$ 是操作 2 ，回到 $a_i$ 的时间点，那就让时间点 $a_i$ 向 $i$ 连边（过去向未来连），因为我们需要的是 $a_i$ 的版本。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%8F%AF%E6%92%A4%E9%94%80%E5%B9%B6%E6%9F%A5%E9%9B%86.cpp">代码</a></p>
+
+            </div>
+        
+    </div>
+
+    <!-- 毛玻璃悬浮目录区域 -->
+    <aside class="toc-container">
+        <div class="toc-header">
+            <h3><i class="fas fa-list"></i> 文章目录</h3>
+            <button class="toc-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="toc-content" id="toc-content"></div>
+    </aside>
+
+    <!-- 移动端目录按钮 -->
+    <div class="toc-mobile-toggle">
+        <i class="fas fa-list"></i>
+    </div>
+
+    
+    
+    <div id="comment">
+        <div id="gitalk-container"></div>
+    </div>
+    
+    
+    
+    
+    
 </div>
 
+    
+
+<!-- 引入悬浮目录资源 -->
+<link rel="stylesheet" href="/css/toc.css">
+<script src="/js/toc.js"></script>
             <footer id="footer">
     <div id="footer-wrap">
         <div>
@@ -415,6 +296,26 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23limqYY7vc8UqtOwE",
+        clientSecret: "46550e05732da9bcac2486329b528d4382f83ac7",
+        repo: "issue",
+        owner: "Ti-ghnari",
+        admin: "Ti-ghnari".split(","),
+        language: "zh-CN",
+        id: location.pathname,
+        
+    })
+    gitalk.render("gitalk-container");
+</script>
+
+
+
+
     
 </body>
 </html>
