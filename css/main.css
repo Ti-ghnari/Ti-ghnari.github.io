@@ -1126,16 +1126,15 @@ ol li {
 
   /* 单个卡片样式 */
 .friend-card {
-    backdrop-filter: none;
     display: flex;
     height: 140px;
-    width: 360;
+    width: 380px;
     text-decoration: none; /* 移除链接下划�?*/
     color: inherit; /* 继承文字颜色 */
-    border: 4px solid #eaeaea;
+    border: 0px solid #eaeaea;
     border-radius: 10px;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0);
 }
 .friend-card:hover {
