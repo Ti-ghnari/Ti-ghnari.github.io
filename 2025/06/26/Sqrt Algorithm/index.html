@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #ff7d73">
+                <a href="/tags/Data-Structure/" style="color: #ffa2c4">
                     Data Structure
                 </a>
             </span>
@@ -313,7 +313,7 @@
 <p>其中 $l,r$ 表示询问区间，$bl,br$ 表示若干个整块。可能的众数集合是：<strong>整块</strong>内的众数，$l\to bl$ 之间的某数，$br\to r$ 之间的某数。</p>
 <p>散块暴力，整块一起，询问区间不能被分为两块时暴力，那么我们就做完了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E8%92%B2%E5%85%AC%E8%8B%B1.cpp">代码</a></p>
-<h3 id="TJOI2007-可爱的质数-【模板】BSGS"><a href="#TJOI2007-可爱的质数-【模板】BSGS" class="headerlink" title=" [TJOI2007] 可爱的质数&#x2F;【模板】BSGS"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3846"> [TJOI2007] 可爱的质数&#x2F;【模板】BSGS</a></h3><p>原式为：$a^l &#x3D; b \pmod p$，化为 $a^{Am-n} &#x3D; b \pmod p$，左右两侧同乘 $a^n$，式子变为：$a^{Am} &#x3D; ba^n \pmod p$</p>
+<h3 id="TJOI2007-可爱的质数-x2F-【模板】BSGS"><a href="#TJOI2007-可爱的质数-x2F-【模板】BSGS" class="headerlink" title=" [TJOI2007] 可爱的质数&#x2F;【模板】BSGS"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3846"> [TJOI2007] 可爱的质数&#x2F;【模板】BSGS</a></h3><p>原式为：$a^l &#x3D; b \pmod p$，化为 $a^{Am-n} &#x3D; b \pmod p$，左右两侧同乘 $a^n$，式子变为：$a^{Am} &#x3D; ba^n \pmod p$</p>
 <p>我们可以预处理出所有的 $b\times a^n \bmod p$ 存入 hash 中，再去计算 $a^{Am} \bmod p$ 然后去查 hash 表中的数是否存在相同的数。 </p>
 <p>用 hash 的时间复杂度是 $O(\sqrt p)$ 。用 map 是 $O(\sqrt p \times \log p)$ </p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91BSGS%E7%AE%97%E6%B3%95.cpp">代码</a></p>
@@ -353,13 +353,13 @@
 <p>可以玄学优化，左端点在偶数块右端点升序，否则降序。</p>
 <h3 id="小Z的袜子"><a href="#小Z的袜子" class="headerlink" title="小Z的袜子"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1494">小Z的袜子</a></h3><p>莫队模板题，排完序直接做就行了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%B0%8FZ%E7%9A%84%E8%A2%9C%E5%AD%90.cpp">代码</a></p>
-<h3 id="国家集训队-数颜色-维护队列"><a href="#国家集训队-数颜色-维护队列" class="headerlink" title=" [国家集训队] 数颜色 &#x2F; 维护队列"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1903"> [国家集训队] 数颜色 &#x2F; 维护队列</a></h3><p>带修莫队模板题。</p>
+<h3 id="国家集训队-数颜色-x2F-维护队列"><a href="#国家集训队-数颜色-x2F-维护队列" class="headerlink" title=" [国家集训队] 数颜色 &#x2F; 维护队列"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1903"> [国家集训队] 数颜色 &#x2F; 维护队列</a></h3><p>带修莫队模板题。</p>
 <p>在莫队基础上加一维时间轴，先按时间轴排序，如果是同一时间轴的则按上述莫队正常排序。</p>
 <p>考虑时间变动的影响，然后去更新消除影响即可。</p>
 <p>复杂度经证明取 $B&#x3D;n^{\frac{2}{3}}$ 最优，所以总体复杂度是 $O(n^{\frac{5}{3}})$</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E6%95%B0%E9%A2%9C%E8%89%B2.cpp">代码</a></p>
 <h2 id="其他例题"><a href="#其他例题" class="headerlink" title="其他例题"></a>其他例题</h2><p>穿插上述各种题目，可能莫队偏多，因为纯考分块的只有lxl大分块。</p>
-<h3 id="Rmq-Problem-mex"><a href="#Rmq-Problem-mex" class="headerlink" title="Rmq Problem &#x2F; mex"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4137">Rmq Problem &#x2F; mex</a></h3><p>显然值域分块再加上前缀和就可以解决出现最小自然数的问题，配合莫队实现区间蠕动即可。</p>
+<h3 id="Rmq-Problem-x2F-mex"><a href="#Rmq-Problem-x2F-mex" class="headerlink" title="Rmq Problem &#x2F; mex"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4137">Rmq Problem &#x2F; mex</a></h3><p>显然值域分块再加上前缀和就可以解决出现最小自然数的问题，配合莫队实现区间蠕动即可。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/P4137%20Rmq%20Problem.cpp">代码</a></p>
 <p>如果你调半天调不出来，可以看看 while() 是不是写成了 if() 。<del>这玩意我看了半小时</del></p>
 <h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4396">作业</a></h3><p>会了上面那个，这个也就很显然了。</p>
