@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Revertible Disjoint Union | Tighnari&#39;s blog</title>
+    <title>Scan Line | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -178,7 +178,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Revertible Disjoint Union</h1>
+        <h1>Scan Line</h1>
     </div>
 
     
@@ -187,7 +187,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/30
+            2025/7/6
         </span>
         
         
@@ -199,15 +199,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #ff7d73">
+                <a href="/tags/study-notes/" style="color: #03a9f4">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #03a9f4">
-                    Data Structure
+                <a href="/tags/summer-holiday/" style="color: #00a596">
+                    summer holiday
                 </a>
             </span>
             
@@ -220,13 +220,183 @@
         
             <!-- 非加密内容直接显示 -->
             <div class="content" v-pre>
-                <p>可撤销并查集</p>
-<span id="more"></span>
+                <h2 id="扫描线"><a href="#扫描线" class="headerlink" title="扫描线"></a>扫描线</h2><span id="more"></span>
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天在吃饭的时候听 @<em>Kenma</em> 讲解了一遍，发现好像很好用而且很好写，就写了。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>拿栈存每次操作时被合并的父亲节点，撤销时直接将其指回自己，所以不能使用路径压缩，使用按秩合并。<br>只能离线。</p>
-<h3 id="可持久化并查集"><a href="#可持久化并查集" class="headerlink" title="可持久化并查集"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3402">可持久化并查集</a></h3><p>发现如果访问某个历史版本时采用一步一步撤销回去太慢了。所以我们建立一棵版本树。<br>形象地说：想象一条以时间为节点的链，上面连着几条跨越时间的边，当我们访问到某个时间节点时，如果他有跨越时间的边，直接访问，然后正常进行操作即可。（有没有感觉很优美而且很有意境，<del>学魔怔了</del>）<br>具体而言：如果时间点 $i$ 不是操作 2 ，那就让时间点 $i$ 向 $i+1$ 连边，时间照常流转；如果时间点 $i$ 是操作 2 ，回到 $a_i$ 的时间点，那就让时间点 $a_i$ 向 $i$ 连边（过去向未来连），因为我们需要的是 $a_i$ 的版本。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%8F%AF%E6%92%A4%E9%94%80%E5%B9%B6%E6%9F%A5%E9%9B%86.cpp">代码</a></p>
+<p><del>PPT讲的好简洁啊，我已经不会概括了。</del>感谢smr学长留下的宝贵PPT的(´▽&#96;ʃ♡ƪ)</p>
+<p> 引用内容是 PTT 原话，不会变成全文引用吧……</p>
+<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>有一些扫描线的本质上的理解：大致就是把原题的限制是 <u>B 维正交范围</u>。</p>
+<ul>
+<li>定义：在一个 $B$ 维直角坐标系下，第 $i$ 维坐标在一个整数范围 $[L_i,R_i]$间，内部的点集。</li>
+</ul>
+<p>这个有些抽象，但一般我们只关注一维和二维的情况，三维或者四维就需要强上数据结构嵌套了。（或者 CDQ 嵌套）</p>
+<p>然后呢以二维平面举例。</p>
+<p>表面上：我们通过排序排掉一维，用数据结构维护另一维。那么扫描线体现在哪呢？</p>
+<p>实际上：我们通过排序排掉了一维，从左往右遍历就是扫描线。数据结构只是维护扫描线移动时另一维的修改于查询。</p>
+<ul>
+<li>对于一个静态的二维问题，我们可以使用扫描线扫一维，数据结构维护另一维。</li>
+</ul>
+<p>同时维护也有技巧：<strong>如果能差分就差分，不能就需要分治。</strong></p>
+<p>以上是对普遍的扫描线思想的理解，当然也有更具体的理解：</p>
+<blockquote>
+<p>另一种看待问题的角度是站在序列角度，而不站在二维平面角度。<br>如果我们这样看待问题，则扫描线实际上是枚举了右端点 $r&#x3D;1\to n$，维护一个数据结构，支持查询<br>对于当前的 $r$，给定一个值 $l$，$l$ 到 $r$ 的答案是什么。<br>即扫描线扫询问右端点，数据结构维护所有左端点的答案。</p>
+</blockquote>
+<p>这两种理解都可以，因为就目前而言，扫描线的题一般都在二维平面上。很少有高维偏序强堆码量的（吧？）</p>
+<h2 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法"></a>具体做法</h2><p>如果能差分，就直接差分最好。有如下差分方式：</p>
+<ul>
+<li>序列区间 $[l,r]$ 差分为 $[1,r]−[1,l−1]$ 的两个前缀。</li>
+<li>树上差分。</li>
+<li>二维前缀和的差分。</li>
+</ul>
+<p><strong>差分的作用可以将一维直接消掉，使得原问题降一维。</strong></p>
+<blockquote>
+<p>差分可以解决“自由度”的问题。<br>因为通过差分我们可以将一个高维问题以常数的代价转换为低维问题。<br>而问题低一维往往会简单非常多。</p>
+<p>所以建议大家做题看到可以差分的区间，树路径等范围，想都不想直接差分掉。</p>
+</blockquote>
+<h3 id="【模板】离线二维数点"><a href="#【模板】离线二维数点" class="headerlink" title="【模板】离线二维数点"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10814">【模板】离线二维数点</a></h3><p>扫描线模板题，离线询问，按 $r$ 升序，另一维权值树状数组即可。</p>
+<p>如果是 $[x,y]$ 呢？差分即可。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define lowbit(i) i&amp;-i
+using namespace std;
+const int N=2e6+10;
+int tr[N];
+int n,m,a[N];
+struct node&#123;
+    int x,id,v;
+&#125;;
+int ans[N];
+vector&lt;node&gt; vec[N];
+void update(int x,int k)&#123;
+    for(int i=x;i&lt;=N-10;i+=lowbit(i))&#123;
+        tr[i]+=k;
+    &#125;
+&#125;
+int query(int x)&#123;
+    int res=0;
+    for(int i=x;i;i-=lowbit(i))&#123;
+        res+=tr[i];
+    &#125;
+    return res;
+&#125;
+int main()&#123;
+#ifdef LOCAL
+    freopen(&quot;D:/Desktop/cpp/data/code.in&quot;,&quot;r&quot;,stdin);
+    freopen(&quot;D:/Desktop/cpp/data/code.out&quot;,&quot;w&quot;,stdout);
+#endif
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=n;i++)&#123;
+        cin&gt;&gt;a[i];
+    &#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        int l,r,x;
+        cin&gt;&gt;l&gt;&gt;r&gt;&gt;x;
+        vec[l-1].push_back(&#123;x,i,-1&#125;);
+        vec[r].push_back(&#123;x,i,1&#125;);
+    &#125;
+    for(int i=1;i&lt;=n;i++)&#123;
+        update(a[i],1);
+        for(node tmp:vec[i])&#123;
+            ans[tmp.id]+=tmp.v*query(tmp.x);
+        &#125;
+    &#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        cout&lt;&lt;ans[i]&lt;&lt;&#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h3><blockquote>
+<p>给一个二维平面，上面有 $n$ 个矩形，每个矩形坐标范围 $[1,n]$。<br>有 $m$ 次查询，每次查询一个二维平面上的点被多少矩形包含。</p>
+</blockquote>
+<p>矩形的左边界赋 1 ，右边界赋 -1。我们就维护了 $x$ 轴方向上的点被多少个矩形覆盖。</p>
+<p>再拿数据结构维护一下 $y$ 轴即可。维护 $y$ 轴的时候记得差分一下。</p>
+<h2 id="反演"><a href="#反演" class="headerlink" title="反演"></a>反演</h2><p>简单而言，区间询问每个元素的情况，可以转化为每个元素对区间的贡献。</p>
+<blockquote>
+<p>具体来说将区间的询问变成二维平面上面的每一个点，将每一个元素贡献的区间变成有贡献的矩形，最<br>后跑一遍扫描线求值即可。</p>
+<p>由于我们把询问区间元素转化成了询问元素对哪些区间有贡献，索性把这种方法称为反演。</p>
+</blockquote>
+<h3 id="HH的项链"><a href="#HH的项链" class="headerlink" title="HH的项链"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1972">HH的项链</a></h3><p>按照古早的思想，发现性质：贡献会在倒数第二次出现的数上，直接维护这个即可。</p>
+<p>但我们现在换个角度考虑问题：</p>
+<p>假设我们现在右端点是 $r$，那么当我们扫到 $r+1$ 时，会新增一个数 $y&#x3D;a_{r+1}$ ，假设 $y$ 上次出现的位置是 $x$，那么 $x+1\to r+1​$ 的位置就会新增一个贡献，进行一个区间加法。然后差分转为 单点加和区间查 即可。</p>
+<h3 id="One-Occurrence"><a href="#One-Occurrence" class="headerlink" title="One Occurrence"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1000F">One Occurrence</a></h3><blockquote>
+<p>这道题我们使用二维平面的方法分析，也就是将区间和每一个位置进行反演。<br>思路就是将询问区间 $[l,r]$ 看做是二维平面上的一个点，然后计算序列中每个位置对哪些询问有贡献。<br>之后变成先进行一些矩形加，后进行一些单点求值的问题。</p>
+<p>我们对序列中每个位置计算后，会发现问题变为 $O(n)$ 次矩形加。<br>之后每个询问的点就是一次单点的值，使用扫描线+树状数组即可，总时间复杂度 $O((n+m)\log n)​$。</p>
+</blockquote>
+<p>上述是 PPT 的题解，是纯种的扫描线。<del>题解区没有树状数组，只有线段树和主席树</del></p>
+<p>但是，众所周知，莫队也是扫描线，所以我们可以用莫队给这题*飞。</p>
+<p>直接值域分块+莫队，add 和 del 是自然的。<del>虽然我 add 写挂了二十分钟没查出来吧</del></p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define B 1025
+using namespace std;
+const int N = 5e5+10;
+int n,a[N],m,cnt[N],ans[N];
+struct node&#123;
+    int l,r,id;
+    bool operator &lt; (const node &amp;a)const&#123;
+        return (l/B==a.l/B) ? ((l/B)&amp;1) ? r&lt;a.r : r&gt;a.r : l/B&lt;a.l/B;
+    &#125;
+&#125;q[N];
+int l=1,r=0;
+int sum[5005],bel[N],tot,L[5005],R[5005];
+void add(int x)&#123;
+    if(cnt[a[x]]==1) sum[bel[a[x]]]--;
+    if(cnt[a[x]]==0) sum[bel[a[x]]]++;
+    cnt[a[x]]++;
+&#125;
+void del(int x)&#123;
+    if(cnt[a[x]]==1) sum[bel[a[x]]]--;
+    if(cnt[a[x]]==2) sum[bel[a[x]]]++;
+    cnt[a[x]]--;
+&#125;
+void init()&#123;
+    tot=(N-11)/B+1;
+    for(int i=1;i&lt;=N-10;i++)&#123;
+        bel[i]=(i-1)/B+1;
+    &#125;
+    for(int i=1;i&lt;=tot;i++)&#123;
+        L[i]=(i-1)*B+1;
+        R[i]=min(i*B,N-10);
+    &#125;
+&#125;
+int query()&#123;
+    for(int i=tot;i&gt;=1;i--)&#123;
+        if(!sum[i]) continue;
+        for(int j=R[i];j&gt;=L[i];j--) if(cnt[j]==1) return j;
+    &#125;
+    return 0;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    init();
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)&#123;
+        cin&gt;&gt;a[i];
+    &#125;
+    cin&gt;&gt;m;
+    for(int i=1;i&lt;=m;i++)&#123;
+        cin&gt;&gt;q[i].l&gt;&gt;q[i].r;
+        q[i].id=i;
+    &#125;
+    sort(q+1,q+1+m);
+    for(int i=1;i&lt;=m;i++)&#123;
+        while(l&lt;q[i].l) del(l++);
+        while(l&gt;q[i].l) add(--l);
+        while(r&lt;q[i].r) add(++r);
+        while(r&gt;q[i].r) del(r--);
+        ans[q[i].id]=query();
+    &#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        cout &lt;&lt; ans[i] &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>还有，本题说的卡常，随手加个奇偶化排序就过了，这算啥卡常啊。</p>
+<p>后面的操作太超模了，先【TBD】了。</p>
 
             </div>
         

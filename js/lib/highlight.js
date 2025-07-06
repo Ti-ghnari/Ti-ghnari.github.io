@@ -32,7 +32,7 @@ mixins.highlight = {
                 let content = i.querySelector(".code-content");
                 hljs.lineNumbersBlock(content, { singleLine: true });
                 let copycode = i.querySelector(".copycode");
-                copycode.addEventListener("click", async () => {
+                copycode.addEventListener("click", async() => {
                     if (this.copying) return;
                     this.copying = true;
                     copycode.classList.add("copied");
