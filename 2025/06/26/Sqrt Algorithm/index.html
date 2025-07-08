@@ -199,14 +199,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #03a9f4">
+                <a href="/tags/study-notes/" style="color: #00a596">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #ffa2c4">
+                <a href="/tags/Data-Structure/" style="color: #ff7d73">
                     Data Structure
                 </a>
             </span>
@@ -258,7 +258,218 @@
 <p>比如有一道题，我们可以 $O(n^2)$ 预处理，$O(1)$ 回答或者 不预处理，$O(n)$ 回答。 </p>
 <p>这两种复杂度我们都不能接受。</p>
 <p>我们可以预处理 $\sqrt n$ 范围的，然后做到 $O(\sqrt n)$ 预处理 ，$O(\sqrt n)$ 回答。</p>
-<p>题目先【TBD】</p>
+<hr>
+<p>上面是我之前学艺不精狗叫，根号分治不仅仅有上面的形式。（现在也学艺不精）</p>
+<h3 id="CF1806E-Tree-Master"><a href="#CF1806E-Tree-Master" class="headerlink" title="CF1806E Tree Master"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1806E">CF1806E Tree Master</a></h3><p>我们将树分层，并对每层的节点数分讨：</p>
+<ul>
+<li>如果当前层节点数大于 $\sqrt n$，这样的层数不超过 $ \sqrt n$ 个，我们直接进行搜索即可。</li>
+<li>如果当前节点数小于 $ \sqrt  n​$，直接使用记忆化搜索即可。</li>
+</ul>
+<p>总之，直接记搜即可。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 1e5+10;
+int n,m,a[N],fa[N],dep[N],sum[N],bel[N];
+ll s[N];
+ll f[N][500];
+ll dfs(int x,int y)&#123;
+    if(x==y) return s[x];
+    if(sum[dep[x]]&lt;480)&#123;
+        if(f[x][bel[y]]) return f[x][bel[y]];
+        return f[x][bel[y]]=dfs(fa[x],fa[y])+1ll*a[x]*a[y];
+    &#125;else return dfs(fa[x],fa[y])+1ll*a[x]*a[y];
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=n;i++)&#123;cin&gt;&gt;a[i];&#125;
+    for(int i=2;i&lt;=n;i++)&#123;cin&gt;&gt;fa[i];&#125;
+    for(int i=1;i&lt;=n;i++)&#123;
+        s[i]=s[fa[i]]+1ll*a[i]*a[i];
+        dep[i]=dep[fa[i]]+1;
+        bel[i]=++sum[dep[i]];
+    &#125;
+    for(int i=1,x,y;i&lt;=m;i++)&#123;
+        cin&gt;&gt;x&gt;&gt;y;
+        cout &lt;&lt; dfs(x,y) &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="P3645-雅加达的摩天楼"><a href="#P3645-雅加达的摩天楼" class="headerlink" title="P3645 雅加达的摩天楼"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3645">P3645 雅加达的摩天楼</a></h3><p>想一个最暴力的暴力，建 $ 9\times 10^8$ 条边，然后直接暴力最短路。</p>
+<p>发现我们其实根本用不到每一条边，所以尝试不存储状态直接 bfs，然后拿 bitset 表示状态，发现过了？</p>
+<p>为什么是对的呢？不应该队列里扔了一堆状态然后暴空间吗？</p>
+<p>我们对跳跃能力分讨：</p>
+<ul>
+<li>当 $p&gt; \sqrt n$ 时，对于这只 doge，只有 $ \sqrt n$ 个位置。总计 $m \sqrt n$ 个状态。</li>
+<li>当 $p&lt;\sqrt n$ 时，对于每个点上状态，只有 $ \sqrt n$ 个不同的跳跃能力。总计 $n\sqrt n$ 个状态。</li>
+</ul>
+<p>所以总状态数是非常正确的，并不会 MLE&#x2F;TLE。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 3e4+10;
+struct node&#123;
+    int id,p,step;
+&#125;;
+queue&lt;node&gt; que;
+bitset&lt;N&gt; vis[N];
+vector&lt;int&gt; vec[N];
+bool v[N];
+int n,m,s,t;
+void push(int i,int p,int step)&#123;
+    if(!v[i])&#123;
+        v[i]=1;
+        for(int a:vec[i])&#123;
+            if(!vis[i].test(a))&#123;
+                vis[i].set(a);
+                que.push(&#123;i,a,step+1&#125;);
+            &#125;
+        &#125;
+    &#125;
+    if(!vis[i].test(p))&#123;
+        vis[i].set(p);
+        que.push(&#123;i,p,step+1&#125;);
+    &#125;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=0;i&lt;m;i++)&#123;
+        int b,p;
+        cin&gt;&gt;b&gt;&gt;p;
+        if(i==0) s=b;
+        if(i==1) t=b;
+        vec[b].push_back(p);
+    &#125;
+    if(s==t)&#123;cout &lt;&lt; 0;return 0;&#125;
+    v[s]=1;
+    for(int a:vec[s])&#123;
+        if(!vis[s].test(a))&#123;
+            vis[s].set(a);
+            que.push(&#123;s,a,0&#125;);
+        &#125;
+    &#125;
+    while(!que.empty())&#123;
+        auto to=que.front();que.pop();
+        if(to.id-to.p==t || to.id+to.p==t)&#123;
+            cout &lt;&lt; to.step+1;
+            return 0;
+        &#125;
+        if(to.id+to.p&lt;n)&#123;
+            push(to.id+to.p,to.p,to.step);
+        &#125;
+        if(to.id-to.p&gt;=0)&#123;
+            push(to.id-to.p,to.p,to.step);
+        &#125;
+    &#125;
+    cout &lt;&lt; -1;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="CF710F-String-Set-Queries"><a href="#CF710F-String-Set-Queries" class="headerlink" title="CF710F String Set Queries"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF710F">CF710F String Set Queries</a></h3><p>分治的标志：<strong>总量不超过……</strong></p>
+<p>对字符串长度进行根号分治：</p>
+<ul>
+<li>长度小于 $ \sqrt n$ 的，上 Trie 树直接维护即可，询问直接暴力查询链和。</li>
+<li>长度大于 $ \sqrt n$ 的，全扔去一边，然后用 KMP 维护，每次查询的时候重跑 KMP，然后暴力查询即可。</li>
+</ul>
+<p>Trie 树上的操作都是 $ \sqrt n$ 的，总计是 $O(n \sqrt n)$。而大于 $ \sqrt n$ 的仅有 $ \sqrt n$ 个，所以总计也是 $O(n \sqrt n)$ 的。</p>
+<p>所以总计的复杂度是 $O(n \sqrt n)$ 。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 3e5+10;
+int n;
+struct Trie&#123;
+    struct node&#123;
+        int son[26];
+        int cnt;
+    &#125;tr[N];
+    int tot=0;
+    void insert(char *s,int val)&#123;
+        int u=0;
+        for(int i=0;s[i];i++)&#123;
+            char ch=s[i];
+            int &amp;son=tr[u].son[ch-&#39;a&#39;];
+            if(!son) son=++tot;
+            u=son;
+        &#125;
+        tr[u].cnt+=val;
+    &#125;
+    int query(char *s)&#123;
+        int u=0,res=0;
+        for(int i=0;s[i];i++)&#123;
+            int c=s[i]-&#39;a&#39;;
+            if(!tr[u].son[c]) break;
+            u=tr[u].son[c];
+            res+=tr[u].cnt;
+        &#125;
+        return res;
+    &#125;
+&#125;T;
+struct KMP&#123;
+    int nxt[N];
+    void build(const string &amp;s,int len)&#123;
+        memset(nxt,0,sizeof(nxt));
+        int i=0,j=-1;nxt[0]=-1;
+        while(i&lt;len)&#123;
+            if(j==-1 || s[i]==s[j]) nxt[++i]=++j;
+            else j=nxt[j];
+        &#125;
+    &#125;
+    int query(string s,char *qry)&#123;
+        int res=0;
+        int lens=s.size(),len=strlen(qry);
+        build(s,s.size());
+        for(int i=0,j=0;i&lt;len;i++)&#123;
+            while(j&gt;0 &amp;&amp; qry[i]!=s[j]) j=nxt[j];
+            if(qry[i]==s[j]) j++;
+            if(j==lens)&#123;
+                res++;
+                j=nxt[j];
+            &#125;
+        &#125;
+        return res;
+    &#125;
+&#125;kmp;
+string que[50];
+char s[N];
+int cnt,val[50];
+int main()&#123;
+//	ios::sync_with_stdio(0);
+//	cin.tie(0);cout.tie(0);
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1,op;i&lt;=n;i++)&#123;
+        scanf(&quot;%d%s&quot;,&amp;op,s);
+        int len=strlen(s);
+        if(op==1 || op==2)&#123;
+            int v=(op==1 ? 1 : -1);
+            if(len&lt;=1000)&#123;
+                T.insert(s,v);
+            &#125;else&#123;
+                que[cnt]=string(s);
+                val[cnt++]=v;
+            &#125;
+        &#125;else&#123;
+            ll ans=0;
+            for(int i=0;i&lt;len;i++)&#123;
+                ans+=T.query(s+i);
+            &#125;
+            for(int i=0;i&lt;cnt;i++)&#123;
+                if(que[i].length()&gt;len) continue;
+                ans+=kmp.query(que[i],s)*val[i];
+            &#125;
+            printf(&quot;%lld\n&quot;,ans);
+            fflush(stdout);
+        &#125;
+    &#125;
+    
+    return 0;
+&#125;
+</code></pre>
 <h2 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h2><p>根号算法的代表，提起根号第一个想到的肯定是我们优雅的分块了！</p>
 <h3 id="算法简介-2"><a href="#算法简介-2" class="headerlink" title="算法简介"></a>算法简介</h3><p>分块是 重构 和 懒标记 的结合，对于修改，通常使用“散块暴力，整块一起”的方法。</p>
 <p>分块的作用主要是 <strong>平衡复杂度</strong> 和 <strong>维护线段树</strong> 等无法维护的信息。</p>
