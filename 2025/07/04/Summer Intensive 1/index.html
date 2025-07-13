@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Summer Intensive | Tighnari&#39;s blog</title>
+    <title>Summer Intensive 1 | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -178,7 +178,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Summer Intensive</h1>
+        <h1>Summer Intensive 1</h1>
     </div>
 
     
@@ -199,14 +199,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #00a596">
+                <a href="/tags/study-notes/" style="color: #ff7d73">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/summer-holiday/" style="color: #00bcd4">
+                <a href="/tags/summer-holiday/" style="color: #ffa2c4">
                     summer holiday
                 </a>
             </span>
@@ -227,13 +227,22 @@
 <li>2025.7.5  10&#x2F;16</li>
 <li>2025.7.6  5&#x2F;15 （这真的是需要写完的吗）</li>
 <li>2025.7.7  1&#x2F;4+5&#x2F;9（一天两场模拟赛，懒得喷了）</li>
+<li>2025.7.8  5&#x2F;14</li>
+<li>2025.7.9  2&#x2F;12</li>
+<li>2025.7.10  放假了！</li>
+<li>2025.7.11  3&#x2F;4  1&#x2F;8（模拟赛，没看输出格式，光荣保龄）</li>
+<li>2025.7.12  4&#x2F;8</li>
+<li>2025.7.13  6&#x2F;9</li>
 </ul>
 <p>真的写不完啊！</p>
 <span id="more"></span>
 
-<h2 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h2><p>2025.7.2-2025.7.5：实话说印象不深了，不知道摆烂的时候干了些啥了。</p>
+<h2 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h2><p>最终决定还是分成几段好一点，一个暑假写一起还是太长了。</p>
+<p>2025.7.2-2025.7.5：实话说印象不深了，不知道摆烂的时候干了些啥了。</p>
 <p>2025.7.6：下午课间打球，晚饭没吃打球，真打爽了。（为啥俩月没打羽毛球技术不降反增啊）</p>
 <p>2025.7.7：上午模拟赛，中午打球，下午模拟赛，晚饭随便吃了点去打球。（已经懒得记录了，明天对我好一点）</p>
+<p>2025.7.8：课间还被ban了，只能打 20 分钟了。</p>
+<p>2025.7.9：今天下雨了，不打算打球了。<del>最终还是选择打球了</del></p>
 <h2 id="2025-7-2"><a href="#2025-7-2" class="headerlink" title="2025.7.2"></a>2025.7.2</h2><p>STL+单调队列&#x2F;栈+并查集</p>
 <p>STL讲了 set 和基于 set 实现的珂朵莉树。没有万众瞩目的 bitset &#96;(<em>&gt;﹏&lt;</em>)′</p>
 <h3 id="珂朵莉树-模板-Problem-896C-Codeforces"><a href="#珂朵莉树-模板-Problem-896C-Codeforces" class="headerlink" title="珂朵莉树 [模板](Problem - 896C - Codeforces)"></a>珂朵莉树 [模板](<a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/896/C">Problem - 896C - Codeforces</a>)</h3><p>只有看完代码那一刻，才知道多么暴力……</p>
@@ -2176,6 +2185,702 @@ int main()&#123;
 <p>给 dbg 学长都讲无语了。</p>
 <p><strong>所以我拒绝了吃屎，选择学习：扫描线</strong></p>
 <h2 id="2025-7-7"><a href="#2025-7-7" class="headerlink" title="2025.7.7"></a>2025.7.7</h2><p>今天就当没发生过，我也没在今天活着。</p>
+<h2 id="2025-7-8"><a href="#2025-7-8" class="headerlink" title="2025.7.8"></a>2025.7.8</h2><p>最小生成树+拓扑+最短路</p>
+<h3 id="P3645-雅加达的摩天楼"><a href="#P3645-雅加达的摩天楼" class="headerlink" title="P3645 雅加达的摩天楼"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3645">P3645 雅加达的摩天楼</a></h3><p>最短路，但是没有用到除 BFS 以外的任何算法。</p>
+<p>直接连边然后 01 BFS 肯定炸空间，那么不连边只保留状态（用bitset）。</p>
+<p>发现我们做完了。其实是根号分治，具体分析可以参考我 根号算法 那篇文章。</p>
+<h3 id="P4180-严格次小生成树"><a href="#P4180-严格次小生成树" class="headerlink" title="P4180 严格次小生成树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4180">P4180 严格次小生成树</a></h3><p>先最小生成树，然后尝试替换掉某一条树边。</p>
+<p>发现只保留最大值是不够的，还需要保留次大值。</p>
+<p>无修改，所以倍增维护一下最大值和次大值即可。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define inf 2e9
+using namespace std;
+const int N = 1e5+10;
+int n,m,fa[N];
+ll sum,ans=1e18;
+int find(int x)&#123;return fa[x]==x ? x : fa[x]=find(fa[x]);&#125;
+struct Edge&#123;
+    int u,v,w;
+    bool operator &lt;(const Edge &amp;a)const&#123;
+        return w&lt;a.w;
+    &#125;
+&#125;e[N&lt;&lt;3];
+bool vis[N&lt;&lt;3];
+struct node&#123;
+    int v,w;
+&#125;;
+vector&lt;node&gt; G[N];
+void Kruskal()&#123;
+    for(int i=1;i&lt;=n;i++) fa[i]=i;
+    sort(e+1,e+1+m);
+    for(int i=1;i&lt;=m;i++)&#123;
+        int x=e[i].u,y=e[i].v;
+        int fx=find(x),fy=find(y);
+        if(fx==fy) continue;
+        sum+=e[i].w;vis[i]=1;
+        G[e[i].u].push_back(&#123;e[i].v,e[i].w&#125;);
+        G[e[i].v].push_back(&#123;e[i].u,e[i].w&#125;);
+        fa[fy]=fx;
+    &#125;
+&#125;
+int f[N][30],g[N][30],h[N][30],dep[N];
+void dfs(int u,int father,int w)&#123;
+    dep[u]=dep[father]+1;
+    f[u][0]=father;
+    g[u][0]=w;h[u][0]=-inf;
+    for(int i=1;i&lt;=20;i++)&#123;
+        f[u][i]=f[f[u][i-1]][i-1];
+        g[u][i]=max(g[u][i-1],g[f[u][i-1]][i-1]);
+        h[u][i]=max(h[u][i-1],h[f[u][i-1]][i-1]);
+        if(g[u][i-1]&gt;g[f[u][i-1]][i-1]) h[u][i]=max(h[u][i],g[f[u][i-1]][i-1]);
+        else if(g[u][i-1]&lt;g[f[u][i-1]][i-1]) h[u][i]=max(h[u][i],g[u][i-1]);
+    &#125;
+    for(auto to:G[u])&#123;
+        int v=to.v,w=to.w;
+        if(v==father) continue;
+        dfs(v,u,w);
+    &#125;
+&#125;
+int LCA(int x,int y)&#123;
+    if(dep[x]&lt;dep[y]) swap(x,y);
+    for(int i=19;i&gt;=0;i--)&#123;
+        if(dep[f[x][i]]&gt;=dep[y]) x=f[x][i];
+    &#125;
+    if(x==y) return x;
+    for(int i=19;i&gt;=0;i--)&#123;
+        if(f[x][i]!=f[y][i]) x=f[x][i],y=f[y][i];
+    &#125;
+    return f[x][0];
+&#125;
+int qmax(int x,int y,int mx)&#123;
+    int res=-inf;
+    for(int i=19;i&gt;=0;i--)&#123;
+        if(dep[f[x][i]]&gt;=dep[y])&#123;
+            if(g[x][i]!=mx) res=max(res,g[x][i]);
+            else res=max(res,h[x][i]);
+            x=f[x][i];
+        &#125;
+    &#125;
+    return res;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1,u,v,w;i&lt;=m;i++)&#123;
+        cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;
+        e[i]=&#123;u,v,w&#125;;
+    &#125;
+    Kruskal();
+    dfs(1,0,0);
+    for(int i=1;i&lt;=m;i++)&#123;
+        if(vis[i]) continue;
+        int u=e[i].u,v=e[i].v,w=e[i].w;
+        int lca=LCA(u,v);
+        int mx1=qmax(u,lca,w);
+        int mx2=qmax(v,lca,w);
+        ans=min(ans,sum-max(mx1,mx2)+w);
+    &#125;
+    cout &lt;&lt; ans;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="P4197-Peaks"><a href="#P4197-Peaks" class="headerlink" title="P4197 Peaks"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4197">P4197 Peaks</a></h3><p>Tips：主席树开 32 倍空间及以上，变量名避免使用 tr 和 rt……</p>
+<p>Kruskal 重构树。</p>
+<p>边权从小到大排序，然后重构树。一棵子树的所有叶子节点都是能到达的山。</p>
+<p>所以考虑倍增维护一下最高能到哪个节点，然后主席树维护区间第 k 大值即可。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define N 100010
+#define M 500010
+using namespace std;
+int n,m,q,h[N],b[N];
+struct Edge&#123;
+    int u,v,w;
+    bool operator &lt; (const Edge &amp;a)const&#123;
+        return w&lt;a.w;
+    &#125;
+&#125;e[M];
+int val[N&lt;&lt;1],fa[N&lt;&lt;1],tot;
+int find(int x)&#123;return fa[x]==x ? x : fa[x]=find(fa[x]);&#125;
+vector&lt;int&gt; G[N&lt;&lt;1];
+int f[N&lt;&lt;1][30];
+void kruskal()&#123;
+    for(int i=1;i&lt;=2*n;i++) fa[i]=i;
+    sort(e+1,e+1+m);tot=n;
+    for(int i=1;i&lt;=m;i++)&#123;
+        int fx=find(e[i].u),fy=find(e[i].v);
+        if(fx==fy) continue;
+        fa[fx]=fa[fy]=++tot;
+        G[tot].push_back(fx);G[tot].push_back(fy);
+        f[fx][0]=f[fy][0]=tot;val[tot]=e[i].w;
+    &#125;
+&#125;
+int ls[N&lt;&lt;5],rs[N&lt;&lt;5],rt[N&lt;&lt;5],tr[N&lt;&lt;5],cnt,num,len,L[N&lt;&lt;1],R[N&lt;&lt;1];
+void update(int &amp;now,int pre,int l,int r,int x)&#123;
+    if(!now) now=++cnt;tr[now]=tr[pre]+1;
+    if(l==r) return;
+    int mid=(l+r)&gt;&gt;1;
+    if(x&lt;=mid)&#123;rs[now]=rs[pre];update(ls[now],ls[pre],l,mid,x);&#125;
+    else&#123;ls[now]=ls[pre];update(rs[now],rs[pre],mid+1,r,x);&#125;
+&#125;
+int query(int u,int lim,int k)&#123;
+    int l=1,r=len;
+    for(int i=19;i&gt;=0;i--)&#123;
+        if(f[u][i] &amp;&amp; val[f[u][i]]&lt;=lim) u=f[u][i];
+    &#125;
+    int x=rt[L[u]-1],y=rt[R[u]];
+    if(tr[y]-tr[x]&lt;k) return -1;
+    while(l&lt;r)&#123;
+        int tmp=tr[rs[y]]-tr[rs[x]];
+        int mid=(l+r)&gt;&gt;1;
+        if(tmp&gt;=k) x=rs[x],y=rs[y],l=mid+1;
+        else x=ls[x],y=ls[y],r=mid,k-=tmp;
+    &#125;
+    return b[r];
+&#125;
+void dfs(int u)&#123;
+    for(int i=1;i&lt;=20;i++)&#123;
+        f[u][i]=f[f[u][i-1]][i-1];
+    &#125;
+    L[u]=++num;
+    if(u&lt;=n) update(rt[num],rt[num-1],1,len,h[u]);
+    else rt[num]=rt[num-1];
+    for(int v:G[u]) dfs(v);
+    R[u]=num;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;q;
+    for(int i=1;i&lt;=n;i++)&#123;cin&gt;&gt;h[i];b[i]=h[i];&#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        int u,v,w;cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;
+        e[i]=&#123;u,v,w&#125;;
+    &#125;
+    sort(b+1,b+1+n);
+    len=unique(b+1,b+1+n)-b-1;
+    for(int i=1;i&lt;=n;i++)&#123;h[i]=lower_bound(b+1,b+1+len,h[i])-b;&#125;
+    kruskal();
+    for(int i=1;i&lt;=tot;i++) if(!L[i]) dfs(find(i));
+    for(int i=1,u,x,k;i&lt;=q;i++)&#123;
+        cin&gt;&gt;u&gt;&gt;x&gt;&gt;k;
+        cout &lt;&lt; query(u,x,k) &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="P2272-最大半连通子图"><a href="#P2272-最大半连通子图" class="headerlink" title="P2272 最大半连通子图"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2272">P2272 最大半连通子图</a></h3><p>Trick：tarjan 缩点后的序列编号是逆序拓扑。</p>
+<p>为数不多的码量较小的题。</p>
+<p>先缩点然后变成 DAG。</p>
+<p>DAG 上 dp 找 最长链就是对的。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 1e5+10;
+int n,m,p;
+vector&lt;int&gt; G1[N],G2[N];
+int dfn[N],dfx,low[N],scc,bel[N],siz[N];
+bool vis[N];
+stack&lt;int&gt; sta;
+void tarjan(int u)&#123;
+    dfn[u]=low[u]=++dfx;
+    vis[u]=1;sta.push(u);
+    for(int v:G1[u])&#123;
+        if(!dfn[v])&#123;
+            tarjan(v);
+            low[u]=min(low[u],low[v]);
+        &#125;else if(vis[v])&#123;
+            low[u]=min(low[u],dfn[v]);
+        &#125;
+    &#125;
+    if(low[u]==dfn[u])&#123;
+        scc++;
+        while(sta.top()!=u)&#123;
+            int t=sta.top();sta.pop();
+            vis[t]=0;
+            bel[t]=scc;
+            siz[scc]++;
+        &#125;
+        vis[u]=0;bel[u]=scc;siz[scc]++;sta.pop();
+    &#125;
+&#125;
+int f[N],g[N],use[N],ans1,ans2;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;p;
+    for(int i=1,u,v;i&lt;=m;i++)&#123;
+        cin&gt;&gt;u&gt;&gt;v;
+        G1[u].push_back(v);
+    &#125;
+    for(int i=1;i&lt;=n;i++)&#123;
+        if(!dfn[i]) tarjan(i);
+    &#125;
+    for(int u=1;u&lt;=n;u++)&#123;
+        f[u]=siz[u];g[u]=1;
+        for(int v:G1[u])&#123;
+            if(bel[u]==bel[v]) continue;
+            G2[bel[u]].push_back(bel[v]);
+        &#125;
+    &#125;
+    for(int u=scc;u&gt;=1;u--)&#123;
+        for(int v:G2[u])&#123;
+            if(use[v]==u) continue;
+            use[v]=u;
+            if(f[v]&lt;f[u]+siz[v])&#123;
+                f[v]=f[u]+siz[v];
+                g[v]=g[u];
+            &#125;else if(f[v]==f[u]+siz[v])&#123;
+                g[v]+=g[u];
+                g[v]%=p;
+            &#125;
+        &#125;
+    &#125;
+    for(int i=1;i&lt;=scc;i++)&#123;
+        if(f[i]&gt;ans1)&#123;
+            ans1=f[i];
+            ans2=g[i];
+        &#125;else if(f[i]==ans1)&#123;
+            ans2+=g[i];
+            ans2%=p;
+        &#125;
+    &#125;
+    cout &lt;&lt; ans1&lt;&lt;&#39;\n&#39;&lt;&lt;ans2;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="2025-7-9"><a href="#2025-7-9" class="headerlink" title="2025.7.9"></a>2025.7.9</h2><p>今天不打算写太多题了，想写写笔记整理一下。</p>
+<h3 id="P4819-杀人游戏"><a href="#P4819-杀人游戏" class="headerlink" title="P4819 杀人游戏"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4819">P4819 杀人游戏</a></h3><p>缩点后 DAG 上询问入度为 0 的点显然正确。</p>
+<p>但是有特殊情况：如果有一个入度为 0 的孤点，我们就没必要去询问他。</p>
+<p>因为我们可以使用排除法给它排除掉。<del>所以这为啥是紫？</del></p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N=3e5+10;
+int n,m;
+map&lt;pair&lt;int,int&gt;,bool&gt; mp;
+vector&lt;int&gt; vec[N];
+vector&lt;int&gt; G[N];
+int low[N],dfn[N],tot,cnt,scc[N],siz[N],in[N];
+stack&lt;int&gt; sta;
+struct Edge&#123;
+    int u,v;
+&#125;e[N];
+bool vis[N];
+void tarjan(int u)&#123;
+    low[u]=dfn[u]=++tot;
+    vis[u] = 1;
+    sta.push(u);
+    for(int v:vec[u])&#123;
+        if(!dfn[v])&#123;
+            tarjan(v);
+            low[u]=min(low[u],low[v]);
+        &#125;else if(vis[v])&#123;
+            low[u]=min(low[u],dfn[v]);
+        &#125;
+    &#125;
+    if(low[u]==dfn[u])&#123;
+        cnt++;
+        // vis[u]=0;
+        // scc[u]=cnt;
+        // siz[cnt]++;
+        while(sta.top()!=u)&#123;
+            scc[sta.top()]=cnt;
+            vis[sta.top()]=0;
+            siz[cnt]++;
+            sta.pop();
+        &#125;
+        vis[u]=0;
+        scc[u]=cnt;
+        siz[cnt]++;
+        sta.pop();
+    &#125;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=m;i++)&#123;
+        int u,v;
+        cin&gt;&gt;u&gt;&gt;v;
+        e[i].u=u,e[i].v=v;
+        if(mp[make_pair(u,v)]) continue;
+        mp[make_pair(u,v)]=1;
+        vec[u].push_back(v);
+    &#125;
+    for(int i=1;i&lt;=n;i++)&#123;
+        if(!dfn[i])&#123;
+            tarjan(i);
+        &#125;
+    &#125;
+    mp.clear();
+    for(int i=1;i&lt;=m;i++)&#123;
+        int u=scc[e[i].u],v=scc[e[i].v];
+        if(u!=v)&#123;
+            if(mp[make_pair(u,v)]) continue;
+            mp[make_pair(u,v)]=1;
+            G[u].push_back(v);
+            in[v]++;
+        &#125;
+    &#125;
+    double ans=0;
+    for(int i=1;i&lt;=cnt;i++)&#123;
+        if(in[i]==0) ans++;
+    &#125;
+    for(int i=1;i&lt;=cnt;i++)&#123;
+        if(in[i]==0 &amp;&amp; siz[i]==1)&#123;
+            bool f=true;
+            for(int v:G[i])&#123;
+                if(in[v]&lt;=1)&#123;
+                    f=false;
+                    break;
+                &#125;
+            &#125;
+            if(f)&#123;
+                ans--;
+                break;
+            &#125;
+        &#125;
+    &#125;
+    cout&lt;&lt;fixed&lt;&lt;setprecision(6)&lt;&lt;(1.0-ans/(1.0*n));
+    return 0;
+&#125;
+</code></pre>
+<h2 id="本阶段总结"><a href="#本阶段总结" class="headerlink" title="本阶段总结"></a>本阶段总结</h2><p>就以不同学长讲课划分阶段吧。</p>
+<p>第一阶段的学长是：Acestar 学长。让我们感谢学长的陪伴与教导。</p>
+<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>单调队列优化dp+并查集+字符串+数据结构+图论+搜索。<del>怎么还在讲搜索啊？！</del></p>
+<p>感觉学了很多题，也有很多新 trick，收获最大的可能就是根号分治的相关内容吧。</p>
+<p>下次做题一定先想根号复杂度。</p>
+<h2 id="2025-7-10"><a href="#2025-7-10" class="headerlink" title="2025.7.10"></a>2025.7.10</h2><p>放假了，宅家打了一上午洲和一下午第五人格。</p>
+<p>空调开着太潮了，关了太热了。</p>
+<p>还没过崩铁新剧情。</p>
+<h2 id="2025-7-11"><a href="#2025-7-11" class="headerlink" title="2025.7.11"></a>2025.7.11</h2><p>回来就是模拟赛，撒尼姆啊？</p>
+<p>T1 是奇妙栈题，下次得多考虑这些奇妙的东西了。</p>
+<p>T2 是树形 dp，没看出来，确实还得多练。</p>
+<p>T3 是概率计数，根本不会啊。</p>
+<p>T4 是边分治+李超树维护斜率。</p>
+<p>题单没做，一道题是规程。</p>
+<h2 id="2025-7-12"><a href="#2025-7-12" class="headerlink" title="2025.7.12"></a>2025.7.12</h2><p>扫描线啊，根本不会啊。做的全是原题，就不在此赘述了。</p>
+<p>晚上没教练，高强度刷知乎半个晚自习。</p>
+<h2 id="2025-7-13"><a href="#2025-7-13" class="headerlink" title="2025.7.13"></a>2025.7.13</h2><p>树上技巧，听懂的最多的一次。</p>
+<h3 id="P5290-十二省联考-2019-春节十二响"><a href="#P5290-十二省联考-2019-春节十二响" class="headerlink" title="P5290 十二省联考 2019 春节十二响"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5290">P5290 十二省联考 2019 春节十二响</a></h3><p>形式化题意：树上染色，链上的颜色不能重复，染一种颜色的代价是相同颜色的最大点权。最小化整棵树染色代价之和。</p>
+<p>什么情况下是最优的：一个节点的所有儿子节点的子树的颜色集合应当尽量重合。</p>
+<p>直接开个堆，然后做启发式合并即可。</p>
+<blockquote>
+<p> PS：有个想法来个老哥实现或者hack，我不会。</p>
+<p>颜色数量上限是最长链，提出最长链，给最长链上的点权排序。</p>
+<p>然后散链依次在最长链上二分插入一些位置。</p>
+<p>可能是个大分讨，也非常的史，不如启发式合并优美。</p>
+</blockquote>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 2e5+10;
+int n,w[N],f[N];
+ll ans=0;
+vector&lt;int&gt; G[N],tmp;
+priority_queue&lt;int&gt; q[N];
+void merge(int x,int y)&#123;
+    if(q[x].size()&lt;q[y].size()) swap(q[x],q[y]);
+    while(!q[y].empty())&#123;
+        tmp.push_back(max(q[y].top(),q[x].top()));
+        q[y].pop();q[x].pop();
+    &#125;
+    while(tmp.size())&#123;
+        q[x].push(tmp.back());tmp.pop_back();
+    &#125;
+&#125;
+void dfs(int u)&#123;
+    for(int v:G[u])&#123;
+        dfs(v);
+        merge(u,v);
+    &#125;
+    q[u].push(w[u]);
+&#125;
+int main()&#123;
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)&#123;
+        cin&gt;&gt;w[i];
+    &#125;
+    for(int i=2;i&lt;=n;i++)&#123;
+        cin&gt;&gt;f[i];
+        G[f[i]].push_back(i);
+    &#125;
+    dfs(1);
+    while(!q[1].empty()) ans+=q[1].top(),q[1].pop();
+    cout &lt;&lt; ans;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="P3979-遥远的国度"><a href="#P3979-遥远的国度" class="headerlink" title="P3979 遥远的国度"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3979">P3979 遥远的国度</a></h3><p>画画图，类似换根的操作把树划分开，然后发现以 1 为定根就行。</p>
+<p>需要刨出 rt 到 1 的点，用树剖然后操作一下就行。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 1e5+10;
+int n,m,a[N],rt;
+vector&lt;int&gt; G[N];
+int fa[N],dfn[N],siz[N],hson[N],dfx,top[N],dep[N],rnk[N];
+void dfs1(int u)&#123;
+    dep[u]=dep[fa[u]]+1;siz[u]=1;
+    for(int v:G[u])&#123;
+        if(v==fa[u]) continue;
+        fa[v]=u;
+        dfs1(v);
+        siz[u]+=siz[v];
+        if(siz[hson[u]]&lt;siz[v]) hson[u]=v;
+    &#125;
+&#125;
+void dfs2(int u,int tp)&#123;
+    top[u]=tp;dfn[u]=++dfx,rnk[dfx]=u;
+    if(!hson[u]) return ;
+    dfs2(hson[u],tp);
+    for(int v:G[u])&#123;
+        if(v==hson[u] || v==fa[u]) continue;
+        dfs2(v,v);
+    &#125;
+&#125;
+struct SegTree&#123;
+#define ls u&lt;&lt;1
+#define rs u&lt;&lt;1|1
+#define mid ((l+r)&gt;&gt;1)
+    ll tr[N&lt;&lt;2],tag[N&lt;&lt;2];
+    void pushup(int u)&#123;
+        tr[u]=min(tr[ls],tr[rs]);
+    &#125;
+    void upd(int u,ll k)&#123;
+        tr[u]=tag[u]=k;
+    &#125;
+    void build(int u,int l,int r)&#123;
+        if(l==r)&#123;tr[u]=a[rnk[l]];return;&#125;
+        build(ls,l,mid);build(rs,mid+1,r);
+        pushup(u);
+    &#125;
+    void pushdown(int u)&#123;
+        if(!tag[u]) return ;
+        upd(ls,tag[u]);upd(rs,tag[u]);
+        tag[u]=0;
+    &#125;
+    void modify(int u,int l,int r,int x,int y,ll k)&#123;
+        if(l&gt;=x &amp;&amp; r&lt;=y)&#123;upd(u,k);return;&#125;
+        pushdown(u);
+        if(x&lt;=mid) modify(ls,l,mid,x,y,k);
+        if(mid&lt;y) modify(rs,mid+1,r,x,y,k);
+        pushup(u);
+    &#125;
+    ll query(int u,int l,int r,int x,int y)&#123;
+        if(l&gt;=x &amp;&amp; r&lt;=y) return tr[u];
+        pushdown(u);
+        ll res=1e18;
+        if(x&lt;=mid) res=min(res,query(ls,l,mid,x,y));
+        if(mid&lt;y) res=min(res,query(rs,mid+1,r,x,y));
+        return res;
+    &#125;
+#undef ls
+#undef rs
+#undef mid
+&#125;Tr;
+void modify(int x,int y,int k)&#123;
+    while(top[x]!=top[y])&#123;
+        if(dep[top[x]]&lt;dep[top[y]]) swap(x,y);
+        Tr.modify(1,1,n,dfn[top[x]],dfn[x],k);
+        x=fa[top[x]];
+    &#125;
+    if(dfn[x]&gt;dfn[y]) swap(x,y);
+    Tr.modify(1,1,n,dfn[x],dfn[y],k);
+&#125;
+int find(int x)&#123;
+    if(x==rt) return -1;
+    if(dfn[x]&gt;=dfn[rt] || dfn[x]+siz[x]-1 &lt; dfn[rt]) return 0;
+    int u=rt;
+    while(top[u]!=top[x])&#123;
+        if(fa[top[u]]==x) return top[u];
+        u=fa[top[u]];
+    &#125;
+    return hson[x];
+&#125;
+ll query(int x)&#123;
+    int u=find(x);
+    if(u==-1) return Tr.tr[1];
+    else if(u==0) return Tr.query(1,1,n,dfn[x],dfn[x]+siz[x]-1);
+    else&#123;
+        ll ans=Tr.query(1,1,n,1,dfn[u]-1);
+        if(dfn[u]+siz[u]-1!=n) ans=min(ans,Tr.query(1,1,n,dfn[u]+siz[u],n));
+        return ans;
+    &#125;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1,u,v;i&lt;n;i++)&#123;
+        cin&gt;&gt;u&gt;&gt;v;
+        G[u].push_back(v);G[v].push_back(u);
+    &#125;
+    for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+    cin&gt;&gt;rt;dfs1(rt);dfs2(rt,rt);
+    Tr.build(1,1,n);
+    for(int i=1,op,x;i&lt;=m;i++)&#123;
+        cin&gt;&gt;op&gt;&gt;x;
+        if(op==1)&#123;
+            rt=x;
+        &#125;else if(op==2)&#123;
+            int y,v;cin&gt;&gt;y&gt;&gt;v;
+            modify(x,y,v);
+        &#125;else&#123;
+            cout &lt;&lt; query(x) &lt;&lt; &#39;\n&#39;;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="P7735-NOI2021-轻重边"><a href="#P7735-NOI2021-轻重边" class="headerlink" title="P7735 NOI2021 轻重边"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7735">P7735 NOI2021 轻重边</a></h3><p>史诗级史题，超级无敌难写。</p>
+<p>首先题意转化：给点颜色覆盖，求相邻的点的相同颜色的数量。</p>
+<p>然后就可以写了，发现一堆细节。然后就一直调调调吧，注意一下链的合并的左右顺序。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 1e5+10;
+int T,n,m;
+vector&lt;int&gt; G[N];
+int dep[N],fa[N],dfn[N],dfx,top[N],siz[N],hson[N];
+void dfs1(int u)&#123;
+    dep[u]=dep[fa[u]]+1;
+    siz[u]=1;
+    for(int v:G[u])&#123;
+        if(v==fa[u]) continue;
+        fa[v]=u;
+        dfs1(v);
+        siz[u]+=siz[v];
+        if(siz[hson[u]]&lt;siz[v]) hson[u]=v;
+    &#125;
+&#125;
+void dfs2(int u,int tp)&#123;
+    top[u]=tp;dfn[u]=++dfx;
+    if(!hson[u]) return ;
+    dfs2(hson[u],tp);
+    for(int v:G[u])&#123;
+        if(v==fa[u] || v==hson[u]) continue;
+        dfs2(v,v);
+    &#125;
+&#125;
+struct Tree&#123;
+    int sum,lc,rc;
+    Tree(int s=0,int l=0,int r=0):sum(s),lc(l),rc(r)&#123;&#125;
+&#125;tr[N&lt;&lt;2];
+struct SegTree&#123;
+#define ls u&lt;&lt;1
+#define rs u&lt;&lt;1|1
+#define mid ((l+r)&gt;&gt;1)
+    int tag[N&lt;&lt;2];
+    void init()&#123;
+        memset(tag,0,sizeof(tag));
+        for(int i=0;i&lt;(N&lt;&lt;2);i++) tr[i]=Tree();
+    &#125;
+    void upd(int u,int k,int len)&#123;
+        tr[u]=Tree(len,k,k);
+        tag[u]=k;
+    &#125;
+    void pushdown(int u,int l,int r)&#123;
+        if(!tag[u]) return;
+        upd(ls,tag[u],mid-l);
+        upd(rs,tag[u],r-mid-1);
+        tag[u]=0;
+    &#125;
+    void modify(int u,int l,int r,int x,int y,int k)&#123;
+        if(l&gt;=x &amp;&amp; r&lt;=y)&#123;
+            upd(u,k,r-l);return;
+        &#125;
+        pushdown(u,l,r);
+        if(x&lt;=mid) modify(ls,l,mid,x,y,k);
+        if(mid&lt;y) modify(rs,mid+1,r,x,y,k);
+        tr[u]=Tree(tr[ls].sum+tr[rs].sum+(tr[ls].rc==tr[rs].lc),tr[ls].lc,tr[rs].rc);
+    &#125;
+    Tree query(int u,int l,int r,int x,int y)&#123;
+        if(l&gt;=x &amp;&amp; r&lt;=y)&#123;
+            return tr[u];
+        &#125;
+        Tree r1=Tree(),r2=Tree();
+        pushdown(u,l,r);
+        if(x&lt;=mid) r1=query(ls,l,mid,x,y);
+        if(mid&lt;y) r2=query(rs,mid+1,r,x,y);
+        if(y&lt;=mid) return r1;
+        else if(x&gt;mid) return r2;
+        else return Tree(r1.sum+r2.sum+(r1.rc==r2.lc),r1.lc,r2.rc);
+    &#125;
+    void print()&#123;
+        for(int i=1;i&lt;n&lt;&lt;2;i++)&#123;
+            cout &lt;&lt; tr[i].lc &lt;&lt; &#39; &#39;;
+        &#125;cout &lt;&lt; &#39;\n&#39;;
+    &#125;
+&#125;Tr;
+void init()&#123;
+    memset(dep,0,sizeof(dep));
+    memset(fa,0,sizeof(fa));
+    memset(dfn,0,sizeof(dfn));
+    memset(top,0,sizeof(top));
+    memset(hson,0,sizeof(hson));
+    memset(siz,0,sizeof(siz));
+    dfx=0;
+    for(int i=1;i&lt;N;i++) G[i].clear();
+&#125;
+void modify(int x,int y,int k)&#123;
+    while(top[x]!=top[y])&#123;
+        if(dep[top[x]]&lt;dep[top[y]]) swap(x,y);
+        Tr.modify(1,1,n,dfn[top[x]],dfn[x],k);
+        x=fa[top[x]];
+    &#125;
+    if(dfn[x]&gt;dfn[y]) swap(x,y);
+    Tr.modify(1,1,n,dfn[x],dfn[y],k);
+&#125;
+int query(int x,int y)&#123;
+    bool f=0;
+    Tree ans1=Tree(),ans2=Tree(),tmp=Tree();
+    while(top[x]!=top[y])&#123;
+        if(dep[top[x]]&lt;dep[top[y]]) swap(x,y),f=!f;
+        tmp=Tr.query(1,1,n,dfn[top[x]],dfn[x]);
+        if(f)&#123;
+            ans2=Tree(tmp.sum+ans2.sum+(tmp.rc==ans2.lc),tmp.lc,ans2.rc);
+        &#125;else&#123;
+            ans1=Tree(ans1.sum+tmp.sum+(ans1.rc==tmp.rc),ans1.lc,tmp.lc);
+        &#125;
+        x=fa[top[x]];
+    &#125;
+    if(dep[x]&lt;dep[y]) swap(x,y),f=!f;
+    tmp=Tr.query(1,1,n,dfn[y],dfn[x]);
+    if(f)&#123;
+        ans2=Tree(tmp.sum+ans2.sum+(tmp.rc==ans2.lc),tmp.lc,ans2.rc);
+    &#125;else&#123;
+        ans1=Tree(ans1.sum+tmp.sum+(ans1.rc==tmp.rc),ans1.lc,tmp.lc);
+    &#125;
+    return ans1.sum+ans2.sum+(ans1.rc==ans2.lc);
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;T;
+    while(T--)&#123;
+        cin&gt;&gt;n&gt;&gt;m;
+        for(int i=1,u,v;i&lt;n;i++)&#123;
+            cin&gt;&gt;u&gt;&gt;v;
+            G[u].push_back(v);G[v].push_back(u);
+        &#125;
+        dfs1(1);dfs2(1,1);
+        Tr.init();
+        for(int i=1;i&lt;=n;i++)&#123;Tr.modify(1,1,n,dfn[i],dfn[i],-i);&#125;
+        for(int i=1,op,a,b;i&lt;=m;i++)&#123;
+            cin&gt;&gt;op&gt;&gt;a&gt;&gt;b;
+            if(op==1)&#123;
+                modify(a,b,i);
+            &#125;else&#123;
+                cout &lt;&lt; query(a,b) &lt;&lt; &#39;\n&#39;;
+            &#125;
+        &#125;
+        init();
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 
             </div>
         
