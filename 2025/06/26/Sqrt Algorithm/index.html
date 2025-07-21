@@ -199,14 +199,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #00bcd4">
+                <a href="/tags/study-notes/" style="color: #ff7d73">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #ffa2c4">
+                <a href="/tags/Data-Structure/" style="color: #00bcd4">
                     Data Structure
                 </a>
             </span>
@@ -547,7 +547,7 @@ int main()&#123;
 <p>我们离线后差分，将区间修改转为单点加法和前缀和即可。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%BA%8F%E5%88%97.cpp">代码</a></p>
 <p>等我写俩题【TBD】</p>
-<h2 id="根号重构"><a href="#根号重构" class="headerlink" title="根号重构"></a>根号重构</h2><h3 id="算法简介-6"><a href="#算法简介-6" class="headerlink" title="算法简介"></a>算法简介</h3><p>平衡修改和询问的复杂度的一个方式吧，具体而言设一个阈值 B，当操作积压到 B 的时候再去处理。</p>
+<h2 id="操作分块（阈值分块）"><a href="#操作分块（阈值分块）" class="headerlink" title="操作分块（阈值分块）"></a>操作分块（阈值分块）</h2><h3 id="算法简介-6"><a href="#算法简介-6" class="headerlink" title="算法简介"></a>算法简介</h3><p>平衡修改和询问的复杂度的一个方式吧，具体而言设一个阈值 B，当操作积压到 B 的时候再去处理。</p>
 <h3 id="桥梁"><a href="#桥梁" class="headerlink" title="桥梁"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5443">桥梁</a></h3><p>观察题目可以发现，我们能想出两种暴力做法：</p>
 <ol>
 <li>暴力模拟所有操作，询问时搜索，是 $O(n^2)$ 的。</li>
@@ -558,6 +558,150 @@ int main()&#123;
 <p>复杂度很好玩了，我们会把操作分成 $\frac{q}{B}$ 块，每块最多 $B$ 个</p>
 <p>将 B 带入上面两个暴力的复杂度，得到最后式子是 $O(qB\log n + \frac{qm\log m}{B})$ ，$B$ 取个 $\sqrt {mlogn}$ 据说跑的飞快，但是我 $B$ 取了个附近的定值，也跑过了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E6%A1%A5%E6%A2%81.cpp">代码</a></p>
+<h2 id="根号重构"><a href="#根号重构" class="headerlink" title="根号重构"></a>根号重构</h2><h3 id="楼房重建"><a href="#楼房重建" class="headerlink" title="楼房重建"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4198">楼房重建</a></h3><p>题意：单点修+固定起点查上升子序列长度。</p>
+<p>正解是单侧递归线段树或分块重构。</p>
+<p>这种看起来很抽象的信息为什么不拿分块！</p>
+<p>对于每一块，用 vector 存上升子序列，查询时二分查找即可。</p>
+<p>对于修改，将所在块的 vector 清空后直接重构。</p>
+<p>两个操作复杂度均为 $O(\sqrt n)$，显然可以轻松通过本题。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+const int N=1e5+10;
+int n,m,a[N],len,bel[N],s=2e9;
+vector&lt;double&gt; vec[N];
+void init()&#123;
+    for(int i=1;i&lt;=n;i++)&#123;
+        bel[i]=(i-1)/len+1;
+    &#125;
+&#125;
+void modify(int x,int k)&#123;
+    a[x]=k;
+    double mx=0;
+    vec[bel[x]].clear();
+    for(int i=(bel[x]-1)*len+1;bel[i]==bel[x] &amp;&amp; i&lt;=n;i++)&#123;
+        if(!a[i]) continue;
+        double tmp=(double)a[i]/(1.0*i);
+        if(tmp&gt;mx) vec[bel[x]].push_back(tmp),mx=tmp;
+    &#125;
+&#125;
+int find(int x,double val)&#123;
+    return vec[x].end()-upper_bound(vec[x].begin(),vec[x].end(),val);
+&#125;
+int query()&#123;
+    int res=0;
+    double mx=(double)a[s]/(1.0*s);
+    for(int i=1;i&lt;=bel[n];i++)&#123;
+        res+=find(i,mx);
+        if(vec[i].empty()) continue;
+        double tmp=(*(--vec[i].end()));
+        if(mx&lt;tmp) mx=tmp;
+    &#125;
+    return res+1;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    len=sqrt(n*log(n));
+    init();
+    for(int i=1;i&lt;=m;i++)&#123;
+        int x,k;
+        cin&gt;&gt;x&gt;&gt;k;
+        s=min(s,x);
+        modify(x,k);
+        cout &lt;&lt; query() &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="弹飞绵羊"><a href="#弹飞绵羊" class="headerlink" title="弹飞绵羊"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3203">弹飞绵羊</a></h3><p>这次你没法选了，不写 分块 你难道写 LCT 吗？</p>
+<p>下文称 $i$ 到达的位置为 $to_i$</p>
+<p>有个非常自然的暴力：</p>
+<ul>
+<li>询问时直接依次遍历模拟，然后得出答案。询问：$O(n)$ 修改：$O(1)$。</li>
+<li>当然稍加思索，如果没有修改，答案就是一段 $to_i$ 的前缀和，可以预处理。询问：$O(1)$ 修改 $O(n)$。</li>
+</ul>
+<p>两个暴力都有了，符合分块平衡复杂度的必要条件了，那就分块呗。</p>
+<p>把指向与 $i$ 一个块内的 $to_i$ 并列起来，然后做前缀和，查询时直接查询前缀和后跳到下一块。</p>
+<p>可能上面说的有点抽象，可以看看代码。（这题还有助于加强对前缀和的理解欸）</p>
+<p>复杂度分析：</p>
+<ul>
+<li>我们把每块内的 $to_i$ 并到一起，指向 $to_{R_i}$，所以查询最多遍历 $\sqrt n$ 个块。</li>
+<li>修改直接重构一整块就行，最多 $\sqrt n$ 个数。</li>
+</ul>
+<p>所以复杂度是 $O(n\sqrt n)​$ 的。你 LCT 跑得过吗？！（跑过了我就去调块长）</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define B 500
+using namespace std;
+const int N = 2e5+10;
+int n,m,a[N];
+int to[N],bel[N],L[N],R[N],tot,cnt[N];
+void init()&#123;
+    tot=(n-1)/B+1;
+    for(int i=1;i&lt;=n;i++)&#123;
+        bel[i]=(i-1)/B+1;
+    &#125;
+    for(int i=1;i&lt;=tot;i++)&#123;
+        L[i]=(i-1)*B+1;
+        R[i]=min(i*B,n);
+    &#125;
+    for(int i=1;i&lt;=tot;i++)&#123;
+        for(int j=R[i];j&gt;=L[i];j--)&#123;
+            if(j+a[j]&lt;=R[i])&#123;
+                cnt[j]+=cnt[j+a[j]]+1;
+                to[j]=to[j+a[j]];
+            &#125;else&#123;
+                cnt[j]=1;
+                to[j]=j+a[j];
+            &#125;
+        &#125;
+    &#125;
+&#125;
+void modify(int x,int k)&#123;
+    a[x]=k;
+    for(int i=R[bel[x]];i&gt;=L[bel[x]];i--) cnt[i]=to[i]=0;
+    for(int i=R[bel[x]];i&gt;=L[bel[x]];i--)&#123;
+        if(i+a[i]&lt;=R[bel[x]])&#123;
+            cnt[i]+=cnt[i+a[i]]+1;
+            to[i]=to[i+a[i]];
+        &#125;else&#123;
+            cnt[i]=1;
+            to[i]=i+a[i];
+        &#125;
+    &#125;
+&#125;
+int query(int x)&#123;
+    int res=0;
+    while(x&lt;=n)&#123;
+        res+=cnt[x];
+        x=to[x];
+    &#125;
+    return res;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)&#123;
+        cin&gt;&gt;a[i];
+    &#125;
+    init();
+    cin&gt;&gt;m;
+    for(int i=1;i&lt;=m;i++)&#123;
+        int op;cin&gt;&gt;op;
+        if(op==1)&#123;
+            int x;cin&gt;&gt;x;x++;
+            cout &lt;&lt; query(x) &lt;&lt; &#39;\n&#39;;
+        &#125;else&#123;
+            int x,y;cin&gt;&gt;x&gt;&gt;y;x++;
+            modify(x,y);
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 <h2 id="莫队"><a href="#莫队" class="headerlink" title="莫队"></a>莫队</h2><h3 id="算法简介-7"><a href="#算法简介-7" class="headerlink" title="算法简介"></a>算法简介</h3><p>莫队是优雅的暴力，通过挪动左右指针来移动到下一个询问区间。</p>
 <p>离线算法，不带修复杂度为 $O(n\sqrt n)$，带修能做到 $O(n^{\frac{5}{3}})$。</p>
 <p>需要将询问排序：如果左端点在同一块内，右端点升序，否则左端点升序。</p>
