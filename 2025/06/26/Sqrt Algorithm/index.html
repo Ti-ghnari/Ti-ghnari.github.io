@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #00bcd4">
+                <a href="/tags/Data-Structure/" style="color: #00a596">
                     Data Structure
                 </a>
             </span>
@@ -558,7 +558,10 @@ int main()&#123;
 <p>复杂度很好玩了，我们会把操作分成 $\frac{q}{B}$ 块，每块最多 $B$ 个</p>
 <p>将 B 带入上面两个暴力的复杂度，得到最后式子是 $O(qB\log n + \frac{qm\log m}{B})$ ，$B$ 取个 $\sqrt {mlogn}$ 据说跑的飞快，但是我 $B$ 取了个附近的定值，也跑过了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E6%A1%A5%E6%A2%81.cpp">代码</a></p>
-<h2 id="根号重构"><a href="#根号重构" class="headerlink" title="根号重构"></a>根号重构</h2><h3 id="楼房重建"><a href="#楼房重建" class="headerlink" title="楼房重建"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4198">楼房重建</a></h3><p>题意：单点修+固定起点查上升子序列长度。</p>
+<h2 id="根号重构"><a href="#根号重构" class="headerlink" title="根号重构"></a>根号重构</h2><h3 id="算法简介-7"><a href="#算法简介-7" class="headerlink" title="算法简介"></a>算法简介</h3><p>你说得对，但是 单点修+维护抽象信息 为什么不想根号重构被修改的块。</p>
+<p>难道你想写什么 奇技淫巧线段树 或者 大力 LCT 吗？</p>
+<p>又或者什么 神奇转化+扫描线 吗？</p>
+<h3 id="楼房重建"><a href="#楼房重建" class="headerlink" title="楼房重建"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4198">楼房重建</a></h3><p>题意：单点修+固定起点查上升子序列长度。</p>
 <p>正解是单侧递归线段树或分块重构。</p>
 <p>这种看起来很抽象的信息为什么不拿分块！</p>
 <p>对于每一块，用 vector 存上升子序列，查询时二分查找即可。</p>
@@ -702,7 +705,7 @@ int main()&#123;
     return 0;
 &#125;
 </code></pre>
-<h2 id="莫队"><a href="#莫队" class="headerlink" title="莫队"></a>莫队</h2><h3 id="算法简介-7"><a href="#算法简介-7" class="headerlink" title="算法简介"></a>算法简介</h3><p>莫队是优雅的暴力，通过挪动左右指针来移动到下一个询问区间。</p>
+<h2 id="莫队"><a href="#莫队" class="headerlink" title="莫队"></a>莫队</h2><h3 id="算法简介-8"><a href="#算法简介-8" class="headerlink" title="算法简介"></a>算法简介</h3><p>莫队是优雅的暴力，通过挪动左右指针来移动到下一个询问区间。</p>
 <p>离线算法，不带修复杂度为 $O(n\sqrt n)$，带修能做到 $O(n^{\frac{5}{3}})$。</p>
 <p>需要将询问排序：如果左端点在同一块内，右端点升序，否则左端点升序。</p>
 <p>可以玄学优化，左端点在偶数块右端点升序，否则降序。</p>
