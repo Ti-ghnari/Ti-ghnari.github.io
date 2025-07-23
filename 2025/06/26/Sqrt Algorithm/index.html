@@ -199,14 +199,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #03a9f4">
+                <a href="/tags/study-notes/" style="color: #ff7d73">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #00bcd4">
+                <a href="/tags/Data-Structure/" style="color: #ffa2c4">
                     Data Structure
                 </a>
             </span>
@@ -734,6 +734,154 @@ int main()&#123;
 <p>考虑莫队维护区间平方和，难道我们要像线段树一样维护一个区间和，再维护一个区间平方和吗？</p>
 <p>我都写莫队了，先把贡献删了，修改后再加回去就行。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%B0%8FB%E7%9A%84%E8%AF%A2%E9%97%AE.cpp">代码</a></p>
+<h3 id="小清新人渣的本愿"><a href="#小清新人渣的本愿" class="headerlink" title="小清新人渣的本愿"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3674">小清新人渣的本愿</a></h3><p>看完这个题面，已经对日本轻小说产生刻板印象了，果咩。</p>
+<p>莫队套 bitset 模板题。</p>
+<p>这种抽象东西肯定要拿莫队维护，然后就上值域 bitset 维护。</p>
+<p>加法就是平移，减法存一个 $N-x$ 的值，然后推两下式子就也可以变成平移。（此时有两个 bitset）</p>
+<p>乘法就可以直接分解质因数，反正是 $\sqrt n$ 的。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define B 213
+using namespace std;
+const int N = 1e5+10;
+const int M = 1e5;
+bitset&lt;N+5&gt; c1,c2;
+struct Q&#123;
+    int op,l,r,x,id;
+    bool operator &lt; (const Q &amp;a)const&#123;
+        return (l/B==a.l/B) ? (l/B&amp;1) ? r&lt;a.r : r&gt;a.r : l/B&lt;a.l/B;
+    &#125;
+&#125;q[N];
+int n,m,a[N],cnt[N];
+bool ans[N];
+void add(int x)&#123;
+    if(cnt[a[x]]==0) c1[a[x]]=c2[M-a[x]]=1;
+    cnt[a[x]]++;
+&#125;
+void del(int x)&#123;
+    cnt[a[x]]--;
+    if(cnt[a[x]]==0) c1[a[x]]=c2[M-a[x]]=0;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=n;i++)&#123;cin&gt;&gt;a[i];&#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        cin&gt;&gt;q[i].op&gt;&gt;q[i].l&gt;&gt;q[i].r&gt;&gt;q[i].x;q[i].id=i;
+    &#125;
+    sort(q+1,q+1+m);
+    int l=1,r=0;
+    for(int i=1;i&lt;=m;i++)&#123;
+        while(l&gt;q[i].l) add(--l);
+        while(r&lt;q[i].r) add(++r);
+        while(l&lt;q[i].l) del(l++);
+        while(r&gt;q[i].r) del(r--);
+        if(q[i].op==1)&#123;
+            if((c1 &amp; (c1&lt;&lt;q[i].x)).any())
+                ans[q[i].id]=1;
+        &#125;else if(q[i].op==2)&#123;
+            if((c1 &amp; (c2&gt;&gt;(M-q[i].x))).any())
+                ans[q[i].id]=1;
+        &#125;else&#123;
+            for(int j=1;j*j&lt;=q[i].x;j++)&#123;
+                if(q[i].x%j==0)&#123;
+                    if(c1[j]&amp;&amp;c1[q[i].x/j])&#123;
+                        ans[q[i].id]=1;
+                        break;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        cout &lt;&lt; (ans[i] ? &quot;hana&quot; : &quot;bi&quot;) &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="曼哈顿交易"><a href="#曼哈顿交易" class="headerlink" title="曼哈顿交易"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3730">曼哈顿交易</a></h3><p>论莫队与值域分块的适配度：100% ！</p>
+<p>虽然本题有奇技淫巧省去值域分块的技巧，但是没必要，复杂度上界不是这个。</p>
+<p>对第 $i$ 种股票开一个桶计数，定义为 $cnt1_i$，再对 $cnt1_i$ 开个桶计数为 $cnt2_i$ 。</p>
+<p>然后莫队维护是简单的，查询也是平凡的，就是简单的跳块然后找到所属块后暴力。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define B 345
+using namespace std;
+const int N = 1e5+10;
+int n,m,a[N],b[N],len;
+struct Q&#123;
+    int l,r,k,id;
+    bool operator &lt; (const Q &amp;a)const&#123;
+        return l/B==a.l/B ? (l/B)&amp;1 ? r&lt;a.r : r&gt;a.r : l/B&lt;a.l/B;
+    &#125;
+    Q(int _l=0,int _r=0,int _k=0,int _id=0):l(_l),r(_r),k(_k),id(_id)&#123;&#125;
+&#125;q[N];
+int ans[N],l=1,r=0;
+int bel[N],L[N],R[N],cnt[N],sum[N],tot,cnt2[N];
+void init()&#123;
+    tot=(N-10-1)/B+1;
+    for(int i=1;i&lt;=N-10;i++)&#123;
+        bel[i]=(i-1)/B+1;
+    &#125;
+    for(int i=1;i&lt;=tot;i++)&#123;
+        L[i]=(i-1)*B+1;
+        R[i]=min(i*B,N-10);
+    &#125;
+&#125;
+void add(int x)&#123;
+    sum[bel[cnt[x]]]--;
+    cnt2[cnt[x]]--;
+    cnt2[++cnt[x]]++;
+    sum[bel[cnt[x]]]++;
+&#125;
+void del(int x)&#123;
+    sum[bel[cnt[x]]]--;
+    cnt2[cnt[x]]--;
+    cnt2[--cnt[x]]++;
+    sum[bel[cnt[x]]]++;
+&#125;
+int query(int k)&#123;
+    int x;
+    for(x=1;x&lt;=tot;x++)&#123;
+        if(k-sum[x]&lt;=0) break;
+        k-=sum[x];
+    &#125;
+    if(x==tot+1) return -1;
+    for(int i=L[x];i&lt;=R[x];i++)&#123;
+        if(k-cnt2[i]&lt;=0) return i;
+        k-=cnt2[i];
+    &#125;
+    return -1;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    init();
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=n;i++)&#123;
+        cin&gt;&gt;a[i];b[i]=a[i];
+    &#125;
+    sort(b+1,b+1+n);len=unique(b+1,b+1+n)-b-1;
+    for(int i=1;i&lt;=n;i++)&#123;a[i]=lower_bound(b+1,b+1+len,a[i])-b;&#125;
+    for(int i=1,l,r,k;i&lt;=m;i++)&#123;
+        cin&gt;&gt;l&gt;&gt;r&gt;&gt;k;
+        q[i]=Q(l,r,k,i);
+    &#125;
+    sort(q+1,q+1+m);
+    for(int i=1;i&lt;=m;i++)&#123;
+        while(l&gt;q[i].l) add(a[--l]);
+        while(r&lt;q[i].r) add(a[++r]);
+        while(l&lt;q[i].l) del(a[l++]);
+        while(r&gt;q[i].r) del(a[r--]);
+        ans[q[i].id]=query(q[i].k);
+    &#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        cout &lt;&lt; ans[i] &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 <h2 id="The-End-去往那五彩斑斓的世界"><a href="#The-End-去往那五彩斑斓的世界" class="headerlink" title="The End 去往那五彩斑斓的世界"></a>The End 去往那<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4117">五彩斑斓的世界</a></h2><blockquote>
 <p>故事终于来到最后，你打败了路上的所有小怪，精英怪，你来到了最终 boss 之前。</p>
 <p>你攥紧了手中的宝具：[突刺贯穿的第二分块]。</p>
