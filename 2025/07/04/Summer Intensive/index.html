@@ -199,14 +199,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #00bcd4">
+                <a href="/tags/study-notes/" style="color: #ffa2c4">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/summer-holiday/" style="color: #ff7d73">
+                <a href="/tags/summer-holiday/" style="color: #00bcd4">
                     summer holiday
                 </a>
             </span>
@@ -234,13 +234,16 @@
 <li>2025.7.12  4&#x2F;8</li>
 <li>2025.7.13  6&#x2F;9</li>
 <li>2025.7.14  3&#x2F;4+0&#x2F;6</li>
-<li>2025.7.15  忘了，懒得看了。初等数论内容</li>
+<li>2025.7.15  忘了，懒得看了。初等数论内容。</li>
 <li>2025.7.16  线性代数内容，懒得看了。</li>
 <li>2025.7.17  模拟赛被打爆了呜呜呜，T1，T2放两个敢写就有分的题干啥呢。</li>
 <li>2025.7.18  放假了！！！上午剧本杀，下午瞎逛。总算是见面了呜呜呜。</li>
-<li>2025.7.19  组合，容斥相关基础内容。实话，根本不会</li>
-<li>2025.7.20  二项式反演+数学杂题。根本不会</li>
+<li>2025.7.19  组合，容斥相关基础内容。实话，根本不会。</li>
+<li>2025.7.20  二项式反演+数学杂题。根本不会。</li>
 <li>2025.7.21  数学题单，上午拼尽全力只写了一道题。下午觉得太摆了，直接继续写分块了。</li>
+<li>2025.7.22  见到了传说中的 ztb 学长，这就是能写出 ztb 倍增的神吗 %%% 学长讲了状压 dp 专题。</li>
+<li>2025.7.23  还是 ztb 学长，dp 优化。讲了单调队列和斜率优化。</li>
+<li>2025.7.24  dp 杂题题单，有点困难啊，感觉 dp 水平远远低于其他人。（别天天琢磨分块了！）</li>
 </ul>
 <p>真的写不完啊！</p>
 <span id="more"></span>
@@ -936,12 +939,9 @@ int main()&#123;
 <p>字符串长度小于 20，暴力 DFS 即可。</p>
 <p>下面长度指匹配的字符串在第几位。</p>
 <ul>
-<li><p>增：任意到达这个节点的儿子，长度不增。</p>
-</li>
-<li><p>删：保留当前节点，长度增加。</p>
-</li>
-<li><p>改：任意匹配这个节点的儿子，长度增加。</p>
-</li>
+<li>增：任意到达这个节点的儿子，长度不增。</li>
+<li>删：保留当前节点，长度增加。</li>
+<li>改：任意匹配这个节点的儿子，长度增加。</li>
 </ul>
 <p>然后就没了，DFS即可。</p>
 <pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
@@ -1455,6 +1455,7 @@ int main()&#123;
     
     return 0;
 &#125;
+
 </code></pre>
 <h3 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h3><p>dbg 学长认真随的数据。</p>
 <p>开题前一个小时没有读到 <strong>无限</strong> 太痛了。</p>
@@ -1504,6 +1505,7 @@ signed main()&#123;
     &#125;
     return 0;
 &#125;	
+
 
 </code></pre>
 <h3 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h3><p>从未见过的 trick，太强了。</p>
@@ -1568,15 +1570,14 @@ int main()&#123;
     &#125;
     return 0;
 &#125;
+
 </code></pre>
 <h3 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h3><p>扔个这个自己讲题的时候也憋不住笑了吗</p>
 <p>题解我发 S2OJ 了，这里的是 copy 的。</p>
 <p>观察题目可以发现，我们能想出两种暴力做法：</p>
 <ol>
-<li><p>暴力模拟所有操作，询问时搜索，单次是 $O(1)$ 和 $O(n)$ 的。</p>
-</li>
-<li><p>离线询问按降序排序，每次回答时重跑时间轴之前的操作，然后拿可撤销并查集维护连通性，单次是 $O(n\log n)$ 和 $O(\log n)$ 的。</p>
-</li>
+<li>暴力模拟所有操作，询问时搜索，单次是 $O(1)$ 和 $O(n)$ 的。</li>
+<li>离线询问按降序排序，每次回答时重跑时间轴之前的操作，然后拿可撤销并查集维护连通性，单次是 $O(n\log n)$ 和 $O(\log n)$ 的。</li>
 </ol>
 <p>发现这两种暴力从截然不同的角度出发，一个枚举边，一个枚举询问。</p>
 <p>复杂度分别是 $O(1)$ 修改，$O(n)$ 查询 和 $O(n\log n)$ 修改，$O(\log n)$ 查询。 </p>
@@ -1589,14 +1590,14 @@ int main()&#123;
 <p>将 B 带入上面的暴力复杂度，得到最后式子是 $O(qB\log n + \frac{qm\log m}{B})$ ，$B$ 取个 $\sqrt {mlogn}$ 据说跑的飞快，但是我 $B$ 取了个附近的定值，也跑过了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E6%A1%A5%E6%A2%81.cpp">代码</a> </p>
 <p>同学说第一条暴力对下文没有关联，也跟算法没有关联。</p>
-<p>其实是有的，分块平衡复杂度的必要条件应该是可以 $O(1)​$ 修改和 $O(n)​$ 查询的同时，能做到 $O(n)​$ 修改和 $O(1)​$ 查询。</p>
+<p>其实是有的，分块平衡复杂度的必要条件应该是可以 $O(1)$ 修改和 $O(n)$ 查询的同时，能做到 $O(n)$ 修改和 $O(1)$ 查询。</p>
 <p>注：这里的 $O(1)$ 广泛地指能接受的复杂度，像上文第二个暴力带 log 的原因是要上并查集。</p>
 <p>目前没见到条件以外能用分块的题。</p>
 <p>两个暴力是有联系的，两个暴力的复杂度互相依赖。</p>
 <p>比如第二个暴力的复杂度可以认为是修改 n 次，也就是 n 次 $O(1)$ 。</p>
 <p>分块平衡了其中一个暴力的复杂度</p>
 <p>不过第一条暴力对下文确实没啥关联，因为我们的操作分块是对第二个暴力做平衡。</p>
-<p>直白地说，如果你第一个暴力的修改是 $O(k)​$ 的，对应的第二个暴力的复杂度是 $O(nk)​$ 的，如果 $k​$ 很大，你怎么分块平衡它。</p>
+<p>直白地说，如果你第一个暴力的修改是 $O(k)$ 的，对应的第二个暴力的复杂度是 $O(nk)$ 的，如果 $k$ 很大，你怎么分块平衡它。</p>
 <h2 id="2025-7-5"><a href="#2025-7-5" class="headerlink" title="2025.7.5"></a>2025.7.5</h2><p>hash+kmp+Manacher</p>
 <h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>前面一个小时被 hash 各种创飞……</p>
 <h3 id="PAL-Palindromes"><a href="#PAL-Palindromes" class="headerlink" title="PAL-Palindromes"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3449">PAL-Palindromes</a></h3><p>发现如果 AB 是可行解的话，那么 BA 也是可行解。</p>
@@ -1885,7 +1886,7 @@ int main()&#123;
     return 0;
 &#125;
 </code></pre>
-<p>headless_piston 的 hash+二分 跑到最优解了？我直接贺一个 $O(n)​$ 的后缀数组来！</p>
+<p>headless_piston 的 hash+二分 跑到最优解了？我直接贺一个 $O(n)$ 的后缀数组来！</p>
 <p>常数太大，仍旧跑不过……</p>
 <h3 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h3><h3 id="String-Set-Queries"><a href="#String-Set-Queries" class="headerlink" title="String Set Queries"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF710F">String Set Queries</a></h3><p>不知道把这个扔这里合不合适啊。</p>
 <p>题解是 启发式合并AC自动机  <del>我瞎取的</del></p>
@@ -2565,13 +2566,13 @@ int main()&#123;
 <p>下次做题一定先想根号复杂度。</p>
 <h2 id="2025-7-10"><a href="#2025-7-10" class="headerlink" title="2025.7.10"></a>2025.7.10</h2><p>放假了，宅家打了一上午洲和一下午第五人格。</p>
 <p>空调开着太潮了，关了太热了。</p>
-<p>还没过崩铁新剧情。</p>
+<p>还没过崩铁新剧情。（想拿笔记本沉浸式体验）</p>
 <h2 id="2025-7-11"><a href="#2025-7-11" class="headerlink" title="2025.7.11"></a>2025.7.11</h2><p>回来就是模拟赛，撒尼姆啊？</p>
 <p>T1 是奇妙栈题，下次得多考虑这些奇妙的东西了。</p>
 <p>T2 是树形 dp，没看出来，确实还得多练。</p>
 <p>T3 是概率计数，根本不会啊。</p>
-<p>T4 是边分治+李超树维护斜率。</p>
-<p>题单没做，一道题是规程。</p>
+<p>T4 是边分治+李超树维护斜率。改了李超树的分。</p>
+<p>题单没做，一道题是归程。</p>
 <h2 id="2025-7-12"><a href="#2025-7-12" class="headerlink" title="2025.7.12"></a>2025.7.12</h2><p>扫描线啊，根本不会啊。做的全是原题，就不在此赘述了。</p>
 <p>晚上没教练，高强度刷知乎半个晚自习。</p>
 <h2 id="2025-7-13"><a href="#2025-7-13" class="headerlink" title="2025.7.13"></a>2025.7.13</h2><p>树上技巧，听懂的最多的一次。</p>
@@ -2579,7 +2580,7 @@ int main()&#123;
 <p>什么情况下是最优的：一个节点的所有儿子节点的子树的颜色集合应当尽量重合。</p>
 <p>直接开个堆，然后做启发式合并即可。</p>
 <blockquote>
-<p> PS：有个想法来个老哥实现或者hack，我不会。</p>
+<p>PS：有个想法来个老哥实现或者hack，我不会。</p>
 <p>颜色数量上限是最长链，提出最长链，给最长链上的点权排序。</p>
 <p>然后散链依次在最长链上二分插入一些位置。</p>
 <p>可能是个大分讨，也非常的史，不如启发式合并优美。</p>
@@ -2901,7 +2902,8 @@ int main()&#123;
 <p>具体题解不写了，还得多练，不能每次看所有题都是新题。</p>
 <p>下午改题，改了 1 2 3 就这样吧。</p>
 <p>还有 DS 题单，但今天可能就只能写一道题了。</p>
-<h2 id="……不想写了"><a href="#……不想写了" class="headerlink" title="……不想写了"></a>……不想写了</h2>
+<h2 id="……不想写了"><a href="#……不想写了" class="headerlink" title="……不想写了"></a>……不想写了</h2><p>接下来就随便记点了。</p>
+
             </div>
         
     </div>
