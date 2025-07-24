@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Dynamic programming | Tighnari&#39;s blog</title>
+    <meta name="author" content="Tighnari" />
+    <meta name="description" content="总有人间一两风，圆我十万八千梦" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>TIGHNARI&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/friends">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;Friend_Links</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;TIGHNARI&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/friends">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Friend_Links</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Dynamic programming</h1>
+    </div>
+
+    
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/7/24
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/study-notes/" style="color: #00bcd4">
+                    study notes
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/DP/" style="color: #00a596">
+                    DP
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <!-- 文章内容区域 - 修复加密逻辑 -->
+    <div class="article-content">
+        
+            <!-- 非加密内容直接显示 -->
+            <div class="content" v-pre>
+                <p>dp 水平过于低下了，不能一天天琢磨分块了。</p>
+<span id="more"></span>
+
+<h2 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h2><h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><p>一加一减一加一减，最后使得所有数恰好被加过一次。</p>
+<h3 id="Min-Max-容斥"><a href="#Min-Max-容斥" class="headerlink" title="Min-Max 容斥"></a>Min-Max 容斥</h3><p>超级优美的式子：</p>
+<p>$Max(S)&#x3D;\sum_{T\in S} (-1)^{|T|+1}\times Min(T)$</p>
+<p>$Min(S)&#x3D;\sum_{T\in S}(-1)^{|T|+1}\times Max(T)$</p>
+<p>但是没用上过，该用的时候也不会ƪ(˘⌣˘)ʃ</p>
+<h3 id="硬币购物"><a href="#硬币购物" class="headerlink" title="硬币购物"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1450">硬币购物</a></h3><p>dp+容斥计数。</p>
+<p>首先可以观察到可以预先处理每种价值的方案数。</p>
+<p>然后套上容斥的式子即可得到答案。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 1e5+10;
+int c[10],d[10];
+int n,s;
+ll f[N],ans;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    for(int i=1;i&lt;=4;i++) cin&gt;&gt;c[i];
+    cin&gt;&gt;n;f[0]=1;
+    for(int i=1;i&lt;=4;i++)&#123;
+        for(int j=c[i];j&lt;=N-10;j++)&#123;
+            f[j]+=f[j-c[i]];
+        &#125;
+    &#125;
+    while(n--)&#123;
+        for(int i=1;i&lt;=4;i++) cin&gt;&gt;d[i];
+        cin&gt;&gt;s;
+        ans=0;
+        for(int i=0;i&lt;(1&lt;&lt;4);i++)&#123;
+            int tot=s,k=1;
+            for(int j=0;j&lt;4;j++)&#123;
+                if((1&lt;&lt;j) &amp; i)&#123;
+                    k=-k;
+                    tot-=(c[j+1]*(d[j+1]+1));
+                &#125;
+            &#125;
+            if(tot&lt;0) continue;
+            ans+=f[tot]*k;
+        &#125;
+        cout &lt;&lt; ans &lt;&lt; &#39;\n&#39;;
+    &#125;
+    
+    return 0;
+&#125;
+</code></pre>
+<h2 id="连续段-DP"><a href="#连续段-DP" class="headerlink" title="连续段 DP"></a>连续段 DP</h2><p>耳朵龙学长说还没有学名，但是非常的强势。</p>
+<h3 id="算法简介-1"><a href="#算法简介-1" class="headerlink" title="算法简介"></a>算法简介</h3><p>尝试把原序列按问题分成若干段，然后不考虑段内情况，只考虑段间的合并。</p>
+<h3 id="kangaroo"><a href="#kangaroo" class="headerlink" title="kangaroo"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5999">kangaroo</a></h3><p>题目固定开头结尾，求生成一个波浪型的数列的方案数。</p>
+<p>我们定义 $f_{i,j}$ 表示前 $i$ 个位置，一共分成 $j$ 段的方案数，要求段内合法。</p>
+<p>考虑第 $i$ 个位置放在哪里然后分讨。具体看代码：</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define p 1000000007
+using namespace std;
+const int N = 2e3+10;
+int n,s,t;
+ll f[N][N];
+int main()&#123;
+//	ios::sync_with_stdio(0);
+//	cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;s&gt;&gt;t;
+    f[1][1]=1;
+    for(int i=2;i&lt;=n;i++)&#123;
+        for(int j=1;j&lt;=i;j++)&#123;
+            if(i!=s &amp;&amp; i!=t)&#123;
+                f[i][j]=(f[i][j]+j*f[i-1][j+1]%p+1ll*(j-(i&gt;t)-(i&gt;s))*f[i-1][j-1]%p)%p;
+            &#125;else&#123;
+                f[i][j]=(f[i-1][j-1]+f[i-1][j])%p;
+            &#125;
+        &#125;
+    &#125;
+    cout &lt;&lt; f[n][1]%p;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="斜率优化-DP"><a href="#斜率优化-DP" class="headerlink" title="斜率优化 DP"></a>斜率优化 DP</h2><h3 id="算法简介-2"><a href="#算法简介-2" class="headerlink" title="算法简介"></a>算法简介</h3><p>将 dp 式子写成一次函数的形式，那么我们就可以进行斜率优化。</p>
+<p>有些题的性质可以使用单调队列，但是李超树一定是万能的。</p>
+<h3 id="玩具装箱"><a href="#玩具装箱" class="headerlink" title="玩具装箱"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3195">玩具装箱</a></h3><p>转移方程形如：$f_i&#x3D;\min(f_j+(s_i-s_j-l)^2)$ s 是前缀和。</p>
+<p>设当前决策点是 $j_1$ 与 $j_2$，并且决策点 $j_2$ 更优。</p>
+<p>划一划，把 $i$ 和 $j$ 分到两侧，然后就得到了：$2\times s_i \ge \dfrac{(f_{j_2}+(s_{j_2}+l)^2)-(f_{j_1}+(s_{j_1}+l)^2)}{s_{j_2}-s_{j_1}}$</p>
+<p>令 $Y(j)&#x3D;f_j+(s_j+l)^2,X(j)&#x3D;s_j$，那么有 $2\times s_i\ge \dfrac{Y(j)-Y(i)}{X(j)-X(i)}$。</p>
+<p>非常好的一次函数的形式，而且因为全部是单调的，所以可以拿单调队列直接维护.。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+const int N = 5e4+10;
+int n,l;
+ll f[N],arr[N],que[N],head=1,tail;
+inline ll X(ll i)&#123;return arr[i];&#125;
+inline ll Y(ll i)&#123;return f[i]+(arr[i]+l)*(arr[i]+l);&#125;
+inline ll d(ll i,ll j)&#123;return (long double)(Y(j)-Y(i))/(X(j)-X(i));&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;l;
+    for(int i=1,x;i&lt;=n;i++)&#123;
+        cin&gt;&gt;x;arr[i]+=arr[i-1]+1+x;
+    &#125;
+    que[++tail]=0;l++;
+    for(int i=1;i&lt;=n;i++)&#123;
+        while(head&lt;tail &amp;&amp; d(que[head],que[head+1])&lt;=2*arr[i]) head++;
+        int j=que[head];
+        f[i]=f[j]+(arr[i]-arr[j]-l)*(arr[i]-arr[j]-l);
+        while(head&lt;tail &amp;&amp; d(que[tail-1],que[tail])&gt;=d(que[tail-1],i)) tail--;
+        que[++tail]=i;
+    &#125;
+    cout &lt;&lt; f[n];
+    return 0;
+&#125;
+</code></pre>
+<h3 id="【模板】李超线段树"><a href="#【模板】李超线段树" class="headerlink" title="【模板】李超线段树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4097">【模板】李超线段树</a></h3><p>这个是维护斜率的宝具，超级无敌强大而且好写。不知道扔哪，就扔这吧。</p>
+<p>首先我们需要一个储存线段的结构体：</p>
+<pre><code class="cpp">struct Line&#123;
+    double k,b;
+    int id;
+    Line(double _k=0,double _b=0,int _id=0):k(_k),b(_b),id(_id)&#123;&#125;
+    double f(int x)&#123;
+        return k*x+b;
+    &#125;
+&#125;tr[N];
+</code></pre>
+<p>然后我们需要一颗线段树，实现 线段覆盖 与 查询 $x$ 点的最大 $y$ 值所对应的线段编号 两个功能。</p>
+<p>查询是 trivial 的，直接递归到对应叶子节点返回就行了。</p>
+<p>重点在于线段覆盖，考虑以下三种情况，找两条线段中点进行比较：</p>
+<ul>
+<li>新线段完全比老线段优：直接覆盖，交换编号即可。</li>
+<li>新线段完全比老线段劣：直接舍弃，不管就行。</li>
+<li>新线段部分比老线段优：将线段劈成两半，继续递归即可。</li>
+</ul>
+<p>可以证明，复杂度最劣为 $O(\log^2 n)$。</p>
+<pre><code class="cpp">    bool cmp(Line x,Line y,int pos)&#123;
+        if(x.f(pos)-y.f(pos)&gt;eps) return true;
+        if(y.f(pos)-x.f(pos)&gt;eps) return false;
+        return x.id&lt;y.id;
+    &#125;	
+    void upd(int u,int l,int r,Line s)&#123;
+        if(cmp(s,tr[u],mid)) swap(s,tr[u]);
+        if(cmp(s,tr[u],l)) upd(ls,l,mid,s);
+        if(cmp(s,tr[u],r)) upd(rs,mid+1,r,s);
+    &#125;
+    void pushdown(int u,int l,int r)&#123;
+        if(!tr[u].id) return ;
+        upd(ls,l,mid,tr[u]);
+        upd(rs,mid+1,r,tr[u]);
+        tr[u]=Line();
+    &#125;
+    int query(int u,int l,int r,int pos)&#123;
+        if(l==r) return tr[u].id;
+        pushdown(u,l,r);
+        if(pos&lt;=mid) return query(ls,l,mid,pos);
+        else return query(rs,mid+1,r,pos);
+    &#125;
+    void modify(int u,int l,int r,int x,int y,Line s)&#123;
+        if(l&gt;=x &amp;&amp; r&lt;=y)&#123;
+            upd(u,l,r,s);return ;
+        &#125;
+        pushdown(u,l,r);
+        if(x&lt;=mid) modify(ls,l,mid,x,y,s);
+        if(mid&lt;y) modify(rs,mid+1,r,x,y,s);
+    &#125;
+</code></pre>
+<p>然后注意下 $k&#x3D;0$ 的情况，特判掉就行。</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define eps 1e-9
+using namespace std;
+const int N = 3e5+10;
+const int M = 40000;
+struct Line&#123;
+    double k,b;
+    int id;
+    Line(double _k=0,double _b=0,int _id=0):k(_k),b(_b),id(_id)&#123;&#125;
+    double f(int x)&#123;
+        return k*x+b;
+    &#125;
+&#125;tr[N];
+struct Tree&#123;
+#define ls u&lt;&lt;1
+#define rs u&lt;&lt;1|1
+#define mid ((l+r)&gt;&gt;1)
+    bool cmp(Line x,Line y,int pos)&#123;
+        if(x.f(pos)-y.f(pos)&gt;eps) return true;
+        if(y.f(pos)-x.f(pos)&gt;eps) return false;
+        return x.id&lt;y.id;
+    &#125;
+    void upd(int u,int l,int r,Line s)&#123;
+        if(cmp(s,tr[u],mid)) swap(s,tr[u]);
+        if(cmp(s,tr[u],l)) upd(ls,l,mid,s);
+        if(cmp(s,tr[u],r)) upd(rs,mid+1,r,s);
+    &#125;
+    void pushdown(int u,int l,int r)&#123;
+        if(!tr[u].id) return ;
+        upd(ls,l,mid,tr[u]);
+        upd(rs,mid+1,r,tr[u]);
+        tr[u]=Line();
+    &#125;
+    int query(int u,int l,int r,int pos)&#123;
+        if(l==r) return tr[u].id;
+        pushdown(u,l,r);
+        if(pos&lt;=mid) return query(ls,l,mid,pos);
+        else return query(rs,mid+1,r,pos);
+    &#125;
+    void modify(int u,int l,int r,int x,int y,Line s)&#123;
+        if(l&gt;=x &amp;&amp; r&lt;=y)&#123;
+            upd(u,l,r,s);return ;
+        &#125;
+        pushdown(u,l,r);
+        if(x&lt;=mid) modify(ls,l,mid,x,y,s);
+        if(mid&lt;y) modify(rs,mid+1,r,x,y,s);
+    &#125;
+&#125;Tr;
+int n,ans,tot;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n;
+    for(int i=1,op;i&lt;=n;i++)&#123;
+        cin&gt;&gt;op;
+        if(op==0)&#123;
+            int pos;cin&gt;&gt;pos;
+            pos=(pos+ans-1)%39989+1;
+            ans=Tr.query(1,1,M,pos);
+            cout &lt;&lt; ans &lt;&lt; &#39;\n&#39;;
+        &#125;else&#123;
+            int x,y,x0,y0;cin&gt;&gt;x&gt;&gt;y&gt;&gt;x0&gt;&gt;y0;
+            x=(x+ans-1)%39989+1;x0=(x0+ans-1)%39989+1;
+            y=(y+ans-1)%1000000000+1;y0=(y0+ans-1)%1000000000+1;
+            if(x&gt;x0) swap(x,x0),swap(y,y0);
+            if(x==x0) Tr.modify(1,1,M,x,x0,Line(0,max(y,y0),++tot));
+            else&#123;
+                double k=1.0*(y-y0)/(x-x0);
+                double b=y-k*x;
+                Tr.modify(1,1,M,x,x0,Line(k,b,++tot));
+            &#125;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>非常的好写，感觉跟普通线段树区别不大。</p>
+
+            </div>
+        
+    </div>
+
+    <!-- 毛玻璃悬浮目录区域 -->
+    <aside class="toc-container">
+        <div class="toc-header">
+            <h3><i class="fas fa-list"></i> 文章目录</h3>
+            <button class="toc-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="toc-content" id="toc-content"></div>
+    </aside>
+
+    <!-- 移动端目录按钮 -->
+    <div class="toc-mobile-toggle">
+        <i class="fas fa-list"></i>
+    </div>
+
+    
+    
+    
+    
+    
+    
+</div>
+
+    
+
+<!-- 引入悬浮目录资源 -->
+<link rel="stylesheet" href="/css/toc.css">
+<script src="/js/toc.js"></script>
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2025 - 2025 Tighnari&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Tighnari
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        <!-- �������� -->
+<div id="desk-pet-container">
+  <div class="tooltip">"Ciallo~!"</div>
+  <div class="desk-pet"></div>
+</div>
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

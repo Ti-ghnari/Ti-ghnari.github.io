@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Suffix Array | Tighnari&#39;s blog</title>
+    <title>Math | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -175,7 +175,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Suffix Array</h1>
+        <h1>Math</h1>
     </div>
 
     
@@ -184,7 +184,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/30
+            2025/7/24
         </span>
         
         
@@ -203,8 +203,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/string/" style="color: #ff7d73">
-                    string
+                <a href="/tags/Math/" style="color: #00a596">
+                    Math
                 </a>
             </span>
             
@@ -217,19 +217,87 @@
         
             <!-- 非加密内容直接显示 -->
             <div class="content" v-pre>
-                <p>后缀数组</p>
+                <p>数论初步内容，主要是线性代数与组合（可能有点杂，因为我不知道放哪）。</p>
 <span id="more"></span>
 
-<h2 id="后缀"><a href="#后缀" class="headerlink" title="后缀"></a>后缀</h2><p>定义字符串 S 。<br>后缀就是以 $i$ 位置为起始到 S 末尾的子串。<br>比如令 S&#x3D;abcab<br>则以 $2$ 起始的后缀为 bcab。</p>
-<h2 id="后缀数组"><a href="#后缀数组" class="headerlink" title="后缀数组"></a>后缀数组</h2><p>用 $sa_i$ 表示排名为 $i$ 的后缀的起始位置的下标。<br>仍令 S&#x3D;abcab<br>那么 S 的后缀分别有：<br>abcab（1）<br>bcab（2）<br>cab（3）<br>ab（4）<br>b（5）<br>对其按字典序排序，轻松得到：<br>ab（4）<br>abcab（1）<br>b（5）<br>bcab（2）<br>cab（3）<br>如果让我们输出 sa 数组，就是例题：</p>
-<h3 id="【模板】后缀排序"><a href="#【模板】后缀排序" class="headerlink" title="【模板】后缀排序"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3809">【模板】后缀排序</a></h3><p>最朴素的想法是什么？<br>因为字典序的排序关键字是最靠左的字符，所以我们可以依次枚举所有后缀，然后挨个排序。<br>复杂度是 $O(n^2\log n)$ ，肯定是不能接受的。<br>所以我们使用稍稍高级的方法：</p>
-<h3 id="倍增"><a href="#倍增" class="headerlink" title="倍增"></a>倍增</h3><p>仔细拜读题解后，感觉题解没说人话。所以我来说我能听懂的人话<del>（当然我也可能不是人）</del><br>仍令S&#x3D;abcab<br>在读入时我们便先做一次排序，但这次排序只对单个字符 $i$ 排序，允许并列，比如第一次排序后，得到的序列如下：<br>1 2 3 1 2<br>随后两两进行合并，位数不够用0补全（空字符字典序最小），得到<br>12 23 31 12 20<br>排序，得到<br>1 3 4 1 2<br>此时序列中第一个 1 表示的就是以 1 为起始位置，长度为 2 的子串在所有长度为 2 的子串中的排名。<br>序列中的 4 表示的就是 以 3 为起始位置，长度为 2 的子串在所有长度为 2 的子串中的排名。<br>我们发现，如果我们令 1，4 接到一起，是否可以得到以 1 为起始位置，长度为 4 的子串在所有长度为 4 的子串中的排名呢？<br>答案是可以的。感性理解的话就是因为决定排名的关键字是最靠左的字符，所以我们这么合并仍保证了最靠左字符大的不会变的比最靠左字符小的小。（是否可以理解为拼后缀时整个子串的字典序单调不降呢？我想是可以的。）<br>那么后续思路不就有了，依次合并新序列的 $i$ 与 $i+2^k$ 即可。<br>都手模到这了，直接模完吧。<br>1 3 4 1 2<br>接下来合并 $i$ 与  $i+2$ ，位数不够补0，得到<br>14 31 42 10 20<br>排序得到<br>2 4 5 1 3<br>然后依据 SA 数组的定义：<br>1 2 3 4 5<br>2 4 5 1 3<br>得到最后的 SA 数组：<br>4 1 5 2 3<br>好了接下来就是代码了，其他的详见代码：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84.cpp">代码</a></p>
-<h3 id="最小表示法"><a href="#最小表示法" class="headerlink" title="最小表示法"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1368">最小表示法</a></h3><p>提示：本题有 $O(n)$ 做法，后缀数组纯属乱搞。</p>
-<p>直接把板子扔上去求出来最小后缀然后分段输出不就是了。<br>一交发现90分，思考将近半小时后，得到如下 hack ：<br>5 4 0 0 0 3 2 4 1 0<br>可以发现，如果按照 SA 板子，会把最后一个 0 当成最小后缀，但显然有更优解 0 0 0 3 2 4 ……<br>怎么办，直接复制一遍数组然后再跑就是了，找最小后缀时只在前半部分找就行。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95.cpp">代码</a></p>
-<h3 id="字符加密"><a href="#字符加密" class="headerlink" title="字符加密"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4051">字符加密</a></h3><p>如果题目要求将字符串从某处分开在首尾相连，只需要复制一遍然后在做后缀数组即可。<br>其他内容就是后缀数组板子了。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ti-ghnari/cpp.github.io/blob/main/%E5%8D%9A%E5%AE%A2%E7%94%A8%E4%BB%A3%E7%A0%81/%E5%AD%97%E7%AC%A6%E5%8A%A0%E5%AF%86.cpp">代码</a></p>
+<h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><h3 id="同余的性质"><a href="#同余的性质" class="headerlink" title="同余的性质"></a>同余的性质</h3><p>直接看成没有除法的加法就可以了，没关系的。</p>
+<h3 id="解同余方程"><a href="#解同余方程" class="headerlink" title="解同余方程"></a>解同余方程</h3><p>使用 Exgcd 可以解同余方程 。</p>
+<h3 id="解同余方程组"><a href="#解同余方程组" class="headerlink" title="解同余方程组"></a>解同余方程组</h3><p>使用 Exgcd 解每一个方程，然后取所有解的 lcm 就是答案。</p>
+<p>这就是 ExCRT。</p>
+<h3 id="乘法逆元"><a href="#乘法逆元" class="headerlink" title="乘法逆元"></a>乘法逆元</h3><p>但如果我们想要做除法怎么办：使用费马小定理即可。</p>
+<p>费马小定理：$a^{-1}&#x3D;a^{p-2} \pmod p​$。要求 $p​$ 为质数。</p>
+<p>你说 $p$ 不为质数怎么办？如果题目保证一定存在逆元，则使用 Exgcd 求解出的 $x$ 就是逆元。</p>
+<p>如果不保证？说明出题人……，不想让你做除法。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>应该考不到。</p>
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>请选择你的阵营：</p>
+<ul>
+<li>组合意义天地灭，代数推导保平安</li>
+<li>代数推导天地灭，组合意义保平安</li>
+</ul>
+<p>目前不会代数推导，数学太差了呜呜呜。</p>
+<h3 id="组合基础"><a href="#组合基础" class="headerlink" title="组合基础"></a>组合基础</h3><p>有以下记号：</p>
+<ul>
+<li>$C_{n}^{m}$ 或者 $(^n_m)$ 表示从 $n$ 个元素中选出 $m$ 个元素的方案数。个人更喜欢 $C$ 的写法。</li>
+<li>$A^m_n$ 表示从 $n$ 个元素中选出 $m$ 个的排列数。</li>
+</ul>
+<p>$C$ 是无序的，$A$ 是有序的，也可以认为 $C$ 选出了一个集合，$A$ 选出了一个序列。</p>
+<p>$A^m_n&#x3D;\dfrac{n!}{(n-m)!}$</p>
+<p> $C_n^m&#x3D;\dfrac{n!}{m!(n-m)!}$</p>
+<p>虽然这个式子已经很优雅了，但不是人类能够计算的，所以我们手玩时可以用这个：</p>
+<p>$A_n^m&#x3D;n\times (n-1)\times …\times (n-m+1)​$</p>
+<p>$C_n^m&#x3D;\dfrac{n\times (n-1)\times …\times (n-m+1)}{m\times (m-1)\times ……1}$</p>
+<p>这两个式子也同时方便了我们 $n,m​$ 不同阶时暴力计算组合&#x2F;排列数。</p>
+<h3 id="多重集的排列数（多重组合数）"><a href="#多重集的排列数（多重组合数）" class="headerlink" title="多重集的排列数（多重组合数）"></a>多重集的排列数（多重组合数）</h3><p>这里指包含重复元素的广义集合，比如集合 $S&#x3D;{n_1\times a_1,n_2\times a_2,…,n_k\times a_k}​$</p>
+<p>所以 $S​$ 的全排列个数为：$\dfrac{n!}{n_1!n_2!…n_k!}​$</p>
+<p>或用符号表示为：$\dbinom{n}{n_1,n_2,…,n_k}​$</p>
+<h3 id="亿点点公式"><a href="#亿点点公式" class="headerlink" title="亿点点公式"></a>亿点点公式</h3><p>我坚定选择组合意义！代数推导太暴力，不够优雅。</p>
+<p>$\dbinom{n}{m}&#x3D;\dbinom{n}{n-m}$ 或 $C_n^m&#x3D;C_n^{n-m}$ </p>
+<p>正确性显然，你选完 $m$ 个剩下的 $n-m$ 个也是选好的。</p>
+<p>$\dbinom{n}{k}&#x3D;\dfrac{n}{k}\dbinom{n-1}{k-1}$</p>
+<p>可以理解为，先在 $n-1$  中选出 $k-1$ 个，然后再选最后一个。每一个元素都可能成为最后一个，所以 $\times n$，但这样会算重，一个元素会被贡献 $k$ 次，所以 $\div k$ 。</p>
+<p>$\dbinom{n}{m}&#x3D;\dbinom{n-1}{m-1}+\dbinom{n-1}{m}$</p>
+<p>可以理解为 $n-1$ 选 $m-1$ 个，然后第 $n$ 个必选 加上 $n-1$ 选 $m$ 个，第 $n$ 个不选的方案数。</p>
+<p>上述用代数推导直接暴力展开就行了。</p>
+<p>$\sum_{i&#x3D;0}^{n}\dbinom{n}{i}&#x3D;2^n​$</p>
+<p>从 $n$ 个数中，不选，选 $1$ 个，选 $2$ 个……选 $n$ 个。这不就是 状压dp 的形式，直接 $2^n$ 就行。</p>
+<p>$\sum_{i&#x3D;0}^{n}(-1)^i \dbinom{n}{i}&#x3D;[n&#x3D;0]$</p>
+<p>容斥原理，还是考虑是 状压dp 的形式，所有数都会被抵消。</p>
+<p>$\sum_{i&#x3D;0}^{k}\dbinom{n}{i}\dbinom{m}{k-i}&#x3D;\dbinom{m+n}{k}$</p>
+<p>范德蒙德卷积，很高级，所以我不会。将一个大集合划分成两个小集合，然后在两个小集合中分别选。</p>
+<p>$\sum_{i&#x3D;0}^{n}\dbinom{n}{i}^2&#x3D;\dbinom{2n}{n}$</p>
+<p>不会的请下载国家反诈APP</p>
+<p>$\sum_{i&#x3D;0}^{n}i\dbinom{n}{i}&#x3D;n2^{n-1}$</p>
+<p>这个咱代数推导吧，我真编不下去了。给它全展了，然后合一合就行了。（好像是，也有可能是我推错了）</p>
+<p>$\sum_{l&#x3D;0}^{n}\dbinom{l}{k}&#x3D;\dbinom{n+1}{k+1}$</p>
+<p>不会，太难了，编不下去了。</p>
+<p>$\dbinom{n}{r}\dbinom{r}{k}&#x3D;\dbinom{n}{k}\dbinom{n-k}{r-k}$</p>
+<p>从 $n$ 中先选 $r$ 个，再从 $r$ 中选 $k$ 个的方案数，等同于先从 $n$ 中选 $k$ 个，再从剩余地方选 $r-k$ 个。</p>
+<h2 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h2><p>若：$g_i&#x3D;\sum_{j&#x3D;0}^{i}\dbinom{i}{j}f_j$</p>
+<p>则：$f_i&#x3D;\sum_{j&#x3D;0}^{i}\dbinom{i}{j}(-1)^{i-j}g_j$</p>
+<p>这个是原式，显然没用。</p>
+<p>变式：</p>
+<ul>
+<li>若：$g_i&#x3D;\sum_{j&#x3D;i}^{n}\dbinom{j}{i}f_j$</li>
+<li>则：$f_i&#x3D;\sum_{j&#x3D;i}^{n}\dbinom{j}{i}(-1)^{j-i}g_j$</li>
+</ul>
+<p>$f_i$ 表示“恰好 i 个”，$g_i$ 表示“钦定 i 个”。</p>
+<p>不会推导，不会做题，全剧终。</p>
+<h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h2><h3 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h3><p>矩阵运算有加法和乘法两种。</p>
+<p>只有长得完全一样的矩阵能相加，只有矩阵 A 的宽等于矩阵 B 的高的矩阵才能相乘。</p>
+<p>矩阵的运算具体可以看 OiWiki，Latex 已经敲傻了。</p>
+<p>具体运用是矩阵快速幂以及线段树维护矩阵。</p>
+<p>矩阵快速幂用来加速递推，因为转移矩阵是相同的，而矩阵乘法有结合律。</p>
+<p>线段树维护矩阵可以方便的维护大量信息，同样因为矩阵乘法有结合律，所以属于半群信息。</p>
+<h3 id="高斯消元"><a href="#高斯消元" class="headerlink" title="高斯消元"></a>高斯消元</h3><p>将高斯消元看作矩阵，一直做恒等变换就是在消元。</p>
+<p>建议直接学校 高斯-约旦 消元。</p>
+<p>代码短且简介，符合人类思考过程。</p>
+<h3 id="线性基"><a href="#线性基" class="headerlink" title="线性基"></a>线性基</h3><p>对于一堆数的异或值，支持以下：</p>
+<ul>
+<li>查询某个值是否能被异或出来，是否存在。</li>
+<li>任选数异或的最大&#x2F;最小值。</li>
+<li>查询任选数异或的第 k 大值。</li>
+</ul>
+<p>非常强力，但是不会。</p>
 
             </div>
         
