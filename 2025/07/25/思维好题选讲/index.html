@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Tags: Team Report | Tighnari&#39;s blog</title>
+    <title>思维好题选讲 | Tighnari&#39;s blog</title>
     <meta name="author" content="Tighnari" />
     <meta name="description" content="总有人间一两风，圆我十万八千梦" />
     <meta name="keywords" content="" />
@@ -42,6 +42,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -169,123 +173,112 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
+            <div class="article">
+    <div>
+        <h1>思维好题选讲</h1>
+    </div>
+
     
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/study-notes/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                study notes
-            </a>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/7/25
         </span>
         
         
-        
-        <span>
-            <a href="/tags/string/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                string
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/study-notes/" style="color: #ffa2c4">
+                    study notes
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/DP/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                DP
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Math/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Math
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Data-Structure/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Data Structure
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/summer-holiday/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                summer holiday
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Team-Report/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Team Report
-            </a>
-        </span>
-        
-        
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/6/30</div>
-            <a href="/2025/06/30/Team%20Weekly%20Report%20017/">
-                <h3>Team Weekly Report 017</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/Team-Report/" style="color: #00bcd4">
-                            Team Report
-                        </a>
-                    </span>
-                    
-                </span>
-                
+    <!-- 文章内容区域 - 修复加密逻辑 -->
+    <div class="article-content">
+        
+            <!-- 非加密内容直接显示 -->
+            <div class="content" v-pre>
+                <p>思维技巧，俗称对脑电波题。</p>
+<span id="more"></span>
+
+<p>就是那种一看题解前没有任何思路，看题解后一下子恍然大悟的题。</p>
+<p>很多时候觉得这些题都没有固定方法，感谢 ReTF 分享的思维技巧。</p>
+<h2 id="观察终态"><a href="#观察终态" class="headerlink" title="观察终态"></a>观察终态</h2><h3 id="寻找充要条件"><a href="#寻找充要条件" class="headerlink" title="寻找充要条件"></a>寻找充要条件</h3><p>当题目中的一些限制条件，难以用人类的方式刻画的时候，我们就需要去观察，发掘性质。</p>
+<p>找到原限制的必要条件，证明它是充要之后，去满足这个充要条件。</p>
+<h3 id="调整"><a href="#调整" class="headerlink" title="调整"></a>调整</h3><p>对解集进行调整，删除不优的结构，在保证最优解的前提下使解集变得最简介。</p>
+<h3 id="观察解的上下界"><a href="#观察解的上下界" class="headerlink" title="观察解的上下界"></a>观察解的上下界</h3><p>当我们需要 最优化&#x2F;构造 一组解的时候，观察解的上下界可能有助于我们解决问题。</p>
+<p>具体的，尝试 最优&#x2F;最劣 情况下按题意能取到的解集，将所有解限定在一定范围内。</p>
+<h3 id="弱化题目"><a href="#弱化题目" class="headerlink" title="弱化题目"></a>弱化题目</h3><p>将题目弱化，然后在做原问题。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>代码都先 【TBD】</p>
+<h3 id="Prefix-Bubble-Sort"><a href="#Prefix-Bubble-Sort" class="headerlink" title="Prefix Bubble Sort"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_arc181_d">Prefix Bubble Sort</a></h3><p>序列中每个数贡献的逆序对数是前缀大于它的数的值，经过一次冒泡贡献会减少 1。</p>
+<p>在时间轴的角度上看，令 $c_i​$ 表示 $i​$ 前大于它的数的值的数量。</p>
+<p>就是这样一段序列：$c_i,c_i,c_i,…,c_i-1,c_i-2,…,0,0,0$</p>
+<p>可以线段树维护差分，支持区间加和区间查询即可。</p>
+<h3 id="LIS-on-Tree-2"><a href="#LIS-on-Tree-2" class="headerlink" title="LIS on Tree 2"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_arc175_d">LIS on Tree 2</a></h3><p>LIS 是 **，所以我们考虑其他条件。</p>
+<p>发现充要条件 $f_{fa}\le f_{u}\le f_{fa}+1$，把这玩意放树上。</p>
+<p>然后发现每个点会贡献 $siz_u$ （子树大小）次。</p>
+<p>然后就变成了选择 $siz_u$ 大小，使得其等于 $K$。</p>
+<p>直接从大到小开始贪心就对了。</p>
+<p>反正我们会剩下一车叶子，肯定能把差的空补上。</p>
+<h3 id="Ranking-sklepow-internetowych"><a href="#Ranking-sklepow-internetowych" class="headerlink" title="Ranking sklepów internetowych"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P9053">Ranking sklepów internetowych</a></h3><p>观察答案（样例）上下界，发现一定有一个 $2n+1$ 能取到。</p>
+<p>然后刻画其他情况，令长度为 $k$</p>
+<p>若令 $x$ 为中位数，则 </p>
+<p>$2x+k&#x3D;2n+1$ </p>
+<p>$2(n-x)&#x3D;k-1$</p>
+<p>$n-x&#x3D;\dfrac{k-1}{2}$</p>
+<p>$x&#x3D;n-\dfrac{k+1}{2}$</p>
+<p>然后你会发现，中位数是 $n-\dfrac{k+1}{2}$ 的条件是，大于等于中位数的数都要在集合里。</p>
+<h3 id="三元链"><a href="#三元链" class="headerlink" title="三元链"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P12058">三元链</a></h3><p>绝世对脑电波题，怎么有人能想到这么抽象的东西。</p>
+<p>我们根本注意不到，像如下这两种构造就可以轻松拿下了。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/d91vr16c.png"></p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/ajk27m3o.png"></p>
+<p>这两个可以以任意形式拼接，并且不会造成任何不合法的情况。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/0ltdmuei.png"></p>
+<p>像这样即可（woc我的眼睛！）</p>
+<h3 id="Delete-AAB-or-BAA"><a href="#Delete-AAB-or-BAA" class="headerlink" title="Delete AAB or BAA"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc066_c">Delete AAB or BAA</a></h3>
             </div>
-        </div>
+        
     </div>
+
+    <!-- 毛玻璃悬浮目录区域 -->
+    <aside class="toc-container">
+        <div class="toc-header">
+            <h3><i class="fas fa-list"></i> 文章目录</h3>
+            <button class="toc-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="toc-content" id="toc-content"></div>
+    </aside>
+
+    <!-- 移动端目录按钮 -->
+    <div class="toc-mobile-toggle">
+        <i class="fas fa-list"></i>
+    </div>
+
+    
+    
+    
+    
+    
     
 </div>
 
+    
+
+<!-- 引入悬浮目录资源 -->
+<link rel="stylesheet" href="/css/toc.css">
+<script src="/js/toc.js"></script>
             <footer id="footer">
     <div id="footer-wrap">
         <div>
@@ -319,6 +312,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
