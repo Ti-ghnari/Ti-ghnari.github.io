@@ -196,14 +196,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/study-notes/" style="color: #00a596">
+                <a href="/tags/study-notes/" style="color: #ff7d73">
                     study notes
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Data-Structure/" style="color: #ff7d73">
+                <a href="/tags/Data-Structure/" style="color: #ffa2c4">
                     Data Structure
                 </a>
             </span>
@@ -875,6 +875,151 @@ int main()&#123;
     &#125;
     for(int i=1;i&lt;=m;i++)&#123;
         cout &lt;&lt; ans[i] &lt;&lt; &#39;\n&#39;;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h3 id="军队"><a href="#军队" class="headerlink" title="军队"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8360">军队</a></h3><p><strong>第二分块</strong>状物，个人感觉写 分块维护并查集 做法比第二分块难写。</p>
+<p>考虑并查集内维护同色块的一个代表，就以第一次出现的为代表即可，将所有的同色块指向代表。</p>
+<p>接下来考虑操作。</p>
+<p>操作一：</p>
+<ul>
+<li>散块直接将所在整块的颜色还原，然后暴力修改后重构即可。</li>
+<li>整块分类讨论，没有 $x$ 颜色不修改，没有 $y$ 颜色替换，两色都有也是暴力还原后修改，复杂度参考势能分析。<blockquote>
+<p>以不同颜色数量为势能，两色都有的时候势能减一，只有 $O(n)$ 种颜色，总复杂度 $O(n\sqrt n)$</p>
+</blockquote>
+</li>
+</ul>
+<p>操作二：</p>
+<ul>
+<li>散块暴力遍历直接加。</li>
+<li>给 $x$ 颜色打 $tag$，然后对块内和加 $cnt_x\times v$。</li>
+</ul>
+<p>操作三：</p>
+<ul>
+<li>散块暴力遍历直接求和。</li>
+<li>整块返回块内和。</li>
+</ul>
+<p>然后代码非常的……</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define B 750
+#define L(i) (i-1)*B+1
+#define R(i) min(i*B,n)
+using namespace std;
+constexpr int N = 2.5e5+5;
+int n,m,col,c[N];
+ll a[N];
+struct Query&#123;
+    int op,l,r,x;
+    ll y;
+&#125;q[N];
+ll tag[N],ans[N],sum;
+int fa[N],cnt[N],pre[N],tot;
+int find(int x)&#123;return fa[x]==x ? x : fa[x]=find(fa[x]);&#125;
+inline void init(const int &amp;x)&#123;
+    sum=0;
+    for(int i=1;i&lt;=col;i++) tag[i]=fa[i]=pre[i]=cnt[i]=0;
+    for(int i=L(x);i&lt;=R(x);i++)&#123;
+        fa[i]=pre[c[i]] ? pre[c[i]] : (pre[c[i]]=i);
+        cnt[c[i]]++;
+        sum+=a[i];
+    &#125;
+&#125;
+inline void modify1(const int &amp;id,const int &amp;x,const int &amp;y)&#123;
+    if(!pre[x]) return ;
+    if(!pre[y])&#123;
+        c[pre[x]]=y;
+        swap(cnt[y],cnt[x]);
+        swap(tag[y],tag[x]);
+        swap(pre[y],pre[x]);
+        return ;
+    &#125;else&#123;
+        cnt[y]+=cnt[x];cnt[x]=0;
+        for(int i=L(id);i&lt;=R(id);i++) c[i]=c[find(i)];
+        for(int i=L(id);i&lt;=R(id);i++)&#123;
+            if(c[i]==x) a[i]-=tag[y]-tag[x],c[i]=y;
+        &#125;
+        fa[pre[x]]=pre[y];tag[x]=pre[x]=0;
+    &#125;
+&#125;
+inline void modify2(const int &amp;id,int l,int r,const int &amp;x,const int &amp;y)&#123;
+    int nl=L(id),nr=R(id);
+    l=max(nl,l),r=min(nr,r);
+    for(int i=nl;i&lt;=nr;i++)&#123;
+        c[i]=c[find(i)];
+        if(c[i]==x || c[i]==y)
+            a[i]+=tag[c[i]];
+    &#125;
+    for(int i=l;i&lt;=r;i++)&#123;
+        if(c[i]==x)	c[i]=y;
+    &#125;
+    cnt[x]=cnt[y]=pre[x]=pre[y]=tag[x]=tag[y]=0;
+    for(int i=nl;i&lt;=nr;i++)&#123;
+        if(c[i]==x || c[i]==y)&#123;
+            fa[i]=pre[c[i]] ? pre[c[i]] : (pre[c[i]]=i);
+            cnt[c[i]]++;
+        &#125;
+    &#125;
+&#125;
+inline void update1(const int &amp;x,const ll &amp;v)&#123;
+    if(!cnt[x]) return ;
+    tag[x]+=v;
+    sum+=v*1ll*cnt[x];
+&#125;
+inline void update2(const int &amp;id,int l,int r,const int &amp;x,const ll &amp;v)&#123;
+    int nl=L(id),nr=R(id);
+    l=max(nl,l),r=min(nr,r);
+    for(int i=l;i&lt;=r;i++)&#123;
+        if(c[find(i)]==x) a[i]+=v,sum+=v;
+    &#125;
+&#125;
+inline ll query1()&#123;
+    return sum;
+&#125;
+inline ll query2(const int &amp;id,int l,int r)&#123;
+    int nl=L(id),nr=R(id);
+    l=max(nl,l),r=min(nr,r);
+    ll res=0;
+    for(int i=l;i&lt;=r;i++)&#123;
+        res+=a[i]+tag[c[find(i)]];
+    &#125;
+    return res;
+&#125;
+int main()&#123;
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;col;
+    tot=(n-1)/B+1;
+    for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i];
+    for(int i=1;i&lt;=n;i++) cin&gt;&gt;c[i];
+    for(int i=1;i&lt;=m;i++)&#123;
+        int op,l,r,x=0,y=0;cin&gt;&gt;op&gt;&gt;l&gt;&gt;r;
+        if(op&lt;3) cin&gt;&gt;x&gt;&gt;y;
+        q[i]=&#123;op,l,r,x,y&#125;;
+    &#125;
+    for(int be=1;be&lt;=tot;be++)&#123;
+        init(be);
+        int nl=L(be),nr=R(be);
+        for(int i=1;i&lt;=m;i++)&#123;
+            int op=q[i].op,l=q[i].l,r=q[i].r;
+            if(nl&gt;r || nr&lt;l) continue;
+            if(op==1)&#123;
+                int x=q[i].x,y=q[i].y;
+                if(nl&gt;=l &amp;&amp; nr&lt;=r) modify1(be,x,y);
+                else modify2(be,l,r,x,y);
+            &#125;else if(op==2)&#123;
+                int x=q[i].x,y=q[i].y;
+                if(nl&gt;=l &amp;&amp; nr&lt;=r) update1(x,y);
+                else update2(be,l,r,x,y);
+            &#125;else&#123;
+                if(nl&gt;=l &amp;&amp; nr&lt;=r) ans[i]+=query1();
+                else ans[i]+=query2(be,l,r);
+            &#125;
+        &#125;
+    &#125;
+    for(int i=1;i&lt;=m;i++)&#123;
+        if(ans[i]) cout &lt;&lt; ans[i] &lt;&lt;&#39;\n&#39;;
     &#125;
     return 0;
 &#125;
