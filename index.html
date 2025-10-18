@@ -303,12 +303,12 @@
         
         <span class="tag">
             
-            <a href="/tags/study-notes/" style="color: #00bcd4">study notes</a>
+            <a href="/tags/study-notes/" style="color: #00a596">study notes</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Data-Structure/" style="color: #ff7d73">Data Structure</a>
+            <a href="/tags/Data-Structure/" style="color: #03a9f4">Data Structure</a>
         </span>
         
     </div>
@@ -356,7 +356,7 @@
         
         <span class="tag">
             
-            <a href="/tags/summer-holiday/" style="color: #ff7d73">summer holiday</a>
+            <a href="/tags/summer-holiday/" style="color: #00a596">summer holiday</a>
         </span>
         
     </div>
@@ -399,7 +399,7 @@
         
         <span class="tag">
             
-            <a href="/tags/study-notes/" style="color: #00bcd4">study notes</a>
+            <a href="/tags/study-notes/" style="color: #00a596">study notes</a>
         </span>
         
     </div>
@@ -442,12 +442,12 @@
         
         <span class="tag">
             
-            <a href="/tags/study-notes/" style="color: #03a9f4">study notes</a>
+            <a href="/tags/study-notes/" style="color: #ffa2c4">study notes</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Math/" style="color: #ff7d73">Math</a>
+            <a href="/tags/Math/" style="color: #00a596">Math</a>
         </span>
         
     </div>
@@ -490,12 +490,12 @@
         
         <span class="tag">
             
-            <a href="/tags/study-notes/" style="color: #ff7d73">study notes</a>
+            <a href="/tags/study-notes/" style="color: #00a596">study notes</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/DP/" style="color: #00a596">DP</a>
+            <a href="/tags/DP/" style="color: #00bcd4">DP</a>
         </span>
         
     </div>
@@ -525,149 +525,6 @@
         <div class="content" v-pre>
             
             <p>好久没更学习笔记了。</p>
-<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>通常情况下，如果是对树上单点的询问，我们是用不到树上的所有点的。</p>
-<p>换句话说，如果我们树上能用到的节点非常少，那我们就可以避免遍历整棵树，从而降低复杂度。</p>
-<p>下面用一个题说。</p>
-<h2 id="消耗战-x2F-【模板】虚树"><a href="#消耗战-x2F-【模板】虚树" class="headerlink" title="消耗战&#x2F;【模板】虚树"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2495">消耗战&#x2F;【模板】虚树</a></h2><p>先想朴素的 dp 做法：设 $f_i$ 表示 $i$ 不与子树中任意一个关键点连接的最小代价。</p>
-<p>枚举 $i$ 的子树 $v$，则有转移方程：</p>
-<ul>
-<li><p>若 $v$ 不是关键点 $f_i&#x3D;f_i+\min(f_v,w(i,v))$</p>
-</li>
-<li><p>若 $v$ 是关键点 $f_i&#x3D;f_i+w(i,v)$</p>
-</li>
-</ul>
-<p>非常简单对吧。</p>
-<p>但是这个玩意是 $O(nq)$ 的，根本跑不动。</p>
-<p>但是 $\sum k$ 比较小，所以我们考虑如果每次只遍历 $k$ 个点，复杂度就可以控制住了。</p>
-<p>然后再观察转移式子，发现 $min(i,v)$ 这一项实际上是链上最小值，这个信息是轻松维护的，我们考虑建出虚树，对虚树 dp。</p>
-<p>然后我们就可以考虑如何建虚树了。</p>
-<h2 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h2><p>虚树上的节点我们称为关键点，关键点包含询问的节点和两两之间的 LCA。</p>
-<h2 id="方法一：两遍排序-LCA"><a href="#方法一：两遍排序-LCA" class="headerlink" title="方法一：两遍排序 LCA"></a>方法一：两遍排序 LCA</h2><p>先将关键点按 DFS 序排序后，两两求 LCA。</p>
-<p>对选出来的点集去重后按 DFS 序排序，再两两求 LCA，并连边。</p>
-<h2 id="方法二：单调栈构建虚树"><a href="#方法二：单调栈构建虚树" class="headerlink" title="方法二：单调栈构建虚树"></a>方法二：单调栈构建虚树</h2><p>我们用单调栈维护虚树上的一条链，栈中的点在虚树上是相邻的，而且栈中自底向上 DFS 序递增。</p>
-<p>然后我们就对不同的情况分讨即可。贴一个代码。</p>
-<pre><code class="cpp">sort(h+1,h+1+k,cmp);
-t=0;sta[++t]=h[1];
-for(int i=2;i&lt;=k;i++)&#123;
-    int now=h[i],lca=LCA(now,sta[t]);
-    while(1)&#123;
-        if(dep[lca]&gt;=dep[sta[t-1]])&#123;
-            if(lca!=sta[t])&#123;
-                M[lca].push_back(sta[t]);
-                if(lca!=sta[t-1]) sta[t]=lca;
-                else t--;
-            &#125;
-            break;
-        &#125;else&#123;
-            M[sta[t-1]].push_back(sta[t]);
-            t--;
-        &#125;
-    &#125;
-    sta[++t]=now;
-&#125;
-while(--t) M[sta[t]].push_back(sta[t+1]);
-</code></pre>
-<p>然后对着新生成的树正常跑 dp 即可。</p>
-<p>撤销的时候按 DFS 序撤销，不要 memest 式清空，不然复杂度就退化了。</p>
-<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
-#define ll long long
-using namespace std;
-constexpr int N = 2.5e5+10;
-int dfn[N],dfx,siz[N],top[N],hson[N],fa[N],dep[N];
-struct Edge&#123;
-    int v;
-    ll w;
-&#125;;
-ll minv[N];
-int n,m,k,h[N];
-bool q[N];
-vector&lt;Edge&gt; G[N];
-vector&lt;int&gt; M[N];
-void dfs1(int u,int f)&#123;
-    fa[u]=f;siz[u]=1;dep[u]=dep[f]+1;
-    for(auto to:G[u])&#123;
-        int v=to.v;
-        if(v==f) continue;
-        minv[v]=min(minv[u],to.w);
-        dfs1(v,u);
-        siz[u]+=siz[v];
-        if(siz[v]&gt;siz[hson[u]]) hson[u]=v;
-    &#125;
-&#125;
-void dfs2(int u,int tp)&#123;
-    top[u]=tp;dfn[u]=++dfx;
-    if(!hson[u]) return ;
-    dfs2(hson[u],tp);
-    for(auto to:G[u])&#123;
-        int v=to.v;
-        if(v==fa[u] || v==hson[u]) continue;
-        dfs2(v,v);
-    &#125;
-&#125;
-int LCA(int x,int y)&#123;
-    while(top[x]!=top[y])&#123;
-        if(dep[top[x]]&lt;dep[top[y]]) swap(x,y);
-        x=fa[top[x]];
-    &#125;
-    return dep[x]&lt;dep[y] ? x : y;
-&#125;
-bool cmp(int x,int y)&#123;
-    return dfn[x]&lt;dfn[y];
-&#125;
-int sta[N],t;
-ll dfs3(int u)&#123;
-    ll sum=0,tmp;
-    for(int v:M[u])&#123;
-        sum+=dfs3(v);
-    &#125;
-    if(q[u])tmp=minv[u];
-    else tmp=min(sum,minv[u]);
-    q[u]=false;
-    M[u].clear();
-    return tmp;
-&#125;
-int main()&#123;
-    ios::sync_with_stdio(0);
-    cin.tie(0);cout.tie(0);
-    minv[1]=1e18;
-    cin&gt;&gt;n;
-    for(int i=1,u,v,w;i&lt;n;i++)&#123;
-        cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;
-        G[u].push_back(&#123;v,w&#125;);G[v].push_back(&#123;u,w&#125;);
-    &#125;
-    dfs1(1,0);dfs2(1,1);
-    cin&gt;&gt;m;
-    while(m--)&#123;
-        cin&gt;&gt;k;
-        for(int i=1;i&lt;=k;i++)&#123;
-            cin&gt;&gt;h[i];q[h[i]]=1;
-        &#125;
-        sort(h+1,h+1+k,cmp);
-        t=0;sta[++t]=h[1];
-        for(int i=2;i&lt;=k;i++)&#123;
-            int now=h[i],lca=LCA(now,sta[t]);
-            while(1)&#123;
-                if(dep[lca]&gt;=dep[sta[t-1]])&#123;
-                    if(lca!=sta[t])&#123;
-                        M[lca].push_back(sta[t]);
-                        if(lca!=sta[t-1]) sta[t]=lca;
-                        else t--;
-                    &#125;
-                    break;
-                &#125;else&#123;
-                    M[sta[t-1]].push_back(sta[t]);
-                    t--;
-                &#125;
-            &#125;
-            sta[++t]=now;
-        &#125;
-        while(--t) M[sta[t]].push_back(sta[t+1]);
-        cout &lt;&lt; dfs3(sta[1]) &lt;&lt; &#39;\n&#39;;
-    &#125;
-    return 0;
-&#125;
-</code></pre>
-
             
         </div>
     </div>
@@ -767,12 +624,12 @@ int main()&#123;
         
         <span class="tag">
             
-            <a href="/tags/study-notes/" style="color: #00a596">study notes</a>
+            <a href="/tags/study-notes/" style="color: #ff7d73">study notes</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/string/" style="color: #ffa2c4">string</a>
+            <a href="/tags/string/" style="color: #03a9f4">string</a>
         </span>
         
     </div>
